@@ -868,3 +868,90 @@ SELECT EXISTS (
 2026-03-13 16:34:51.491 +07:00 [INF] Request finished HTTP/2 GET https://localhost:7046/_vs/browserLink - 200 null text/javascript; charset=UTF-8 113.0394ms
 2026-03-13 16:34:51.676 +07:00 [INF] Request starting HTTP/2 GET https://localhost:7046/swagger/v1/swagger.json - null null
 2026-03-13 16:34:51.697 +07:00 [INF] Request finished HTTP/2 GET https://localhost:7046/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 21.3189ms
+2026-03-13 17:01:44.280 +07:00 [INF] Executed DbCommand (296ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT "MigrationId", "ProductVersion"
+FROM "__EFMigrationsHistory"
+ORDER BY "MigrationId";
+2026-03-13 17:01:44.787 +07:00 [INF] Executed DbCommand (44ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE IF NOT EXISTS "__EFMigrationsHistory" (
+    "MigrationId" character varying(150) NOT NULL,
+    "ProductVersion" character varying(32) NOT NULL,
+    CONSTRAINT "PK___EFMigrationsHistory" PRIMARY KEY ("MigrationId")
+);
+2026-03-13 17:01:44.795 +07:00 [INF] Acquiring an exclusive lock for migration application. See https://aka.ms/efcore-docs-migrations-lock for more information if this takes too long.
+2026-03-13 17:01:44.835 +07:00 [INF] Executed DbCommand (39ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+LOCK TABLE "__EFMigrationsHistory" IN ACCESS EXCLUSIVE MODE
+2026-03-13 17:01:44.875 +07:00 [INF] Executed DbCommand (37ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT "MigrationId", "ProductVersion"
+FROM "__EFMigrationsHistory"
+ORDER BY "MigrationId";
+2026-03-13 17:01:44.882 +07:00 [INF] No migrations were applied. The database is already up to date.
+2026-03-13 17:01:45.135 +07:00 [INF] Executed DbCommand (41ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "Users" AS u)
+2026-03-13 17:01:45.166 +07:00 [INF] User profile is available. Using 'C:\Users\LAPTOP MSI\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2026-03-13 17:01:45.385 +07:00 [INF] Now listening on: https://localhost:7046
+2026-03-13 17:01:45.386 +07:00 [INF] Now listening on: http://localhost:5135
+2026-03-13 17:01:45.450 +07:00 [INF] Application started. Press Ctrl+C to shut down.
+2026-03-13 17:01:45.452 +07:00 [INF] Hosting environment: Development
+2026-03-13 17:01:45.453 +07:00 [INF] Content root path: E:\Code\MyAPI\MyAPI
+2026-03-13 17:02:07.038 +07:00 [INF] Request starting HTTP/2 POST https://localhost:7046/api/Auth/login - application/json 53
+2026-03-13 17:02:08.035 +07:00 [INF] Executing endpoint 'MyAPI.Controllers.AuthController.Login (MyAPI)'
+2026-03-13 17:02:08.051 +07:00 [INF] Route matched with {action = "Login", controller = "Auth"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Login(MyAPI.Models.LoginRequest) on controller MyAPI.Controllers.AuthController (MyAPI).
+2026-03-13 17:02:08.225 +07:00 [INF] Executed DbCommand (45ms) [Parameters=[@__username_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT u."Id", u."Password", u."Username"
+FROM "Users" AS u
+WHERE u."Username" = @__username_0
+LIMIT 1
+2026-03-13 17:02:08.634 +07:00 [INF] Executing OkObjectResult, writing value of type '<>f__AnonymousType1`4[[System.String, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Int32, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Boolean, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2026-03-13 17:02:08.647 +07:00 [INF] Executed action MyAPI.Controllers.AuthController.Login (MyAPI) in 589.9936ms
+2026-03-13 17:02:08.651 +07:00 [INF] Executed endpoint 'MyAPI.Controllers.AuthController.Login (MyAPI)'
+2026-03-13 17:02:08.658 +07:00 [INF] Request finished HTTP/2 POST https://localhost:7046/api/Auth/login - 200 null application/json; charset=utf-8 1628.2244ms
+2026-03-13 17:03:22.521 +07:00 [INF] Request starting HTTP/2 GET https://localhost:7046/swagger/index.html - null null
+2026-03-13 17:03:22.662 +07:00 [INF] Request finished HTTP/2 GET https://localhost:7046/swagger/index.html - 200 null text/html;charset=utf-8 140.9019ms
+2026-03-13 17:03:22.666 +07:00 [INF] Request starting HTTP/2 GET https://localhost:7046/_framework/aspnetcore-browser-refresh.js - null null
+2026-03-13 17:03:22.666 +07:00 [INF] Request starting HTTP/2 GET https://localhost:7046/_vs/browserLink - null null
+2026-03-13 17:03:22.667 +07:00 [INF] Request starting HTTP/2 GET https://localhost:7046/swagger/index.js - null null
+2026-03-13 17:03:22.680 +07:00 [INF] Request finished HTTP/2 GET https://localhost:7046/swagger/index.js - 200 null application/javascript;charset=utf-8 13.2591ms
+2026-03-13 17:03:22.732 +07:00 [INF] Request finished HTTP/2 GET https://localhost:7046/_framework/aspnetcore-browser-refresh.js - 200 14915 application/javascript; charset=utf-8 66.4154ms
+2026-03-13 17:03:22.753 +07:00 [INF] Request finished HTTP/2 GET https://localhost:7046/_vs/browserLink - 200 null text/javascript; charset=UTF-8 86.7099ms
+2026-03-13 17:03:22.861 +07:00 [INF] Request starting HTTP/2 GET https://localhost:7046/swagger/v1/swagger.json - null null
+2026-03-13 17:03:22.875 +07:00 [INF] Request finished HTTP/2 GET https://localhost:7046/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 13.8649ms
+2026-03-13 17:03:38.092 +07:00 [INF] Request starting HTTP/2 GET https://localhost:7046/ - null null
+2026-03-13 17:03:38.095 +07:00 [INF] Executing endpoint 'HTTP: GET /'
+2026-03-13 17:03:38.110 +07:00 [INF] Setting HTTP status code 200.
+2026-03-13 17:03:38.112 +07:00 [INF] Writing value of type 'String' as Json.
+2026-03-13 17:03:38.113 +07:00 [INF] Executed endpoint 'HTTP: GET /'
+2026-03-13 17:03:38.114 +07:00 [INF] Request finished HTTP/2 GET https://localhost:7046/ - 200 null application/json; charset=utf-8 22.4155ms
+2026-03-13 17:03:44.277 +07:00 [INF] Request starting HTTP/2 GET https://localhost:7046/ - null null
+2026-03-13 17:03:44.285 +07:00 [INF] Executing endpoint 'HTTP: GET /'
+2026-03-13 17:03:44.287 +07:00 [INF] Setting HTTP status code 200.
+2026-03-13 17:03:44.287 +07:00 [INF] Writing value of type 'String' as Json.
+2026-03-13 17:03:44.290 +07:00 [INF] Executed endpoint 'HTTP: GET /'
+2026-03-13 17:03:44.291 +07:00 [INF] Request finished HTTP/2 GET https://localhost:7046/ - 200 null application/json; charset=utf-8 13.9576ms
+2026-03-13 17:03:44.324 +07:00 [INF] Request starting HTTP/2 GET https://localhost:7046/favicon.ico - null null
+2026-03-13 17:03:44.327 +07:00 [INF] Request finished HTTP/2 GET https://localhost:7046/favicon.ico - 404 0 null 3.3371ms
+2026-03-13 17:03:44.332 +07:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET https://localhost:7046/favicon.ico, Response status code: 404
+2026-03-13 17:03:50.610 +07:00 [INF] Request starting HTTP/2 GET https://localhost:7046/swagger/index.html - null null
+2026-03-13 17:03:50.614 +07:00 [INF] Request finished HTTP/2 GET https://localhost:7046/swagger/index.html - 200 null text/html;charset=utf-8 3.6202ms
+2026-03-13 17:03:50.622 +07:00 [INF] Request starting HTTP/2 GET https://localhost:7046/_vs/browserLink - null null
+2026-03-13 17:03:50.622 +07:00 [INF] Request starting HTTP/2 GET https://localhost:7046/swagger/index.js - null null
+2026-03-13 17:03:50.622 +07:00 [INF] Request starting HTTP/2 GET https://localhost:7046/_framework/aspnetcore-browser-refresh.js - null null
+2026-03-13 17:03:50.630 +07:00 [INF] Request finished HTTP/2 GET https://localhost:7046/swagger/index.js - 200 null application/javascript;charset=utf-8 7.7497ms
+2026-03-13 17:03:50.672 +07:00 [INF] Request finished HTTP/2 GET https://localhost:7046/_framework/aspnetcore-browser-refresh.js - 200 14915 application/javascript; charset=utf-8 50.3079ms
+2026-03-13 17:03:50.685 +07:00 [INF] Request finished HTTP/2 GET https://localhost:7046/_vs/browserLink - 200 null text/javascript; charset=UTF-8 62.7158ms
+2026-03-13 17:03:50.726 +07:00 [INF] Request starting HTTP/2 GET https://localhost:7046/swagger/v1/swagger.json - null null
+2026-03-13 17:03:50.732 +07:00 [INF] Request finished HTTP/2 GET https://localhost:7046/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 6.1555ms
+2026-03-13 17:04:31.524 +07:00 [INF] Request starting HTTP/2 POST https://localhost:7046/api/Auth/login - application/json 49
+2026-03-13 17:04:31.528 +07:00 [INF] Executing endpoint 'MyAPI.Controllers.AuthController.Login (MyAPI)'
+2026-03-13 17:04:31.529 +07:00 [INF] Route matched with {action = "Login", controller = "Auth"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Login(MyAPI.Models.LoginRequest) on controller MyAPI.Controllers.AuthController (MyAPI).
+2026-03-13 17:04:31.712 +07:00 [INF] Executed DbCommand (132ms) [Parameters=[@__username_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT u."Id", u."Password", u."Username"
+FROM "Users" AS u
+WHERE u."Username" = @__username_0
+LIMIT 1
+2026-03-13 17:04:31.903 +07:00 [INF] Executing OkObjectResult, writing value of type '<>f__AnonymousType1`4[[System.String, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Int32, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Boolean, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2026-03-13 17:04:31.904 +07:00 [INF] Executed action MyAPI.Controllers.AuthController.Login (MyAPI) in 374.1308ms
+2026-03-13 17:04:31.906 +07:00 [INF] Executed endpoint 'MyAPI.Controllers.AuthController.Login (MyAPI)'
+2026-03-13 17:04:31.908 +07:00 [INF] Request finished HTTP/2 POST https://localhost:7046/api/Auth/login - 200 null application/json; charset=utf-8 383.3478ms
