@@ -1,0 +1,332 @@
+2026-03-13 12:23:40.027 +07:00 [INF] Now listening on: https://localhost:7046
+2026-03-13 12:23:40.067 +07:00 [INF] Now listening on: http://localhost:5135
+2026-03-13 12:23:40.133 +07:00 [INF] Application started. Press Ctrl+C to shut down.
+2026-03-13 12:23:40.141 +07:00 [INF] Hosting environment: Development
+2026-03-13 12:23:40.143 +07:00 [INF] Content root path: E:\Code\MyAPI\MyAPI
+2026-03-13 12:24:01.260 +07:00 [INF] Request starting HTTP/2 GET https://localhost:7046/ - null null
+2026-03-13 12:24:01.395 +07:00 [INF] Request finished HTTP/2 GET https://localhost:7046/ - 404 null null 142.64ms
+2026-03-13 12:24:01.402 +07:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET https://localhost:7046/, Response status code: 404
+2026-03-13 12:24:09.703 +07:00 [INF] Request starting HTTP/2 GET https://localhost:7046/swagger/index.html - null null
+2026-03-13 12:24:09.761 +07:00 [INF] Request finished HTTP/2 GET https://localhost:7046/swagger/index.html - 304 null null 57.6381ms
+2026-03-13 12:24:09.770 +07:00 [INF] Request starting HTTP/2 GET https://localhost:7046/swagger/swagger-ui.css - null null
+2026-03-13 12:24:09.771 +07:00 [INF] Request starting HTTP/2 GET https://localhost:7046/swagger/swagger-ui-standalone-preset.js - null null
+2026-03-13 12:24:09.770 +07:00 [INF] Request starting HTTP/2 GET https://localhost:7046/swagger/index.js - null null
+2026-03-13 12:24:09.770 +07:00 [INF] Request starting HTTP/2 GET https://localhost:7046/swagger/index.css - null null
+2026-03-13 12:24:09.910 +07:00 [INF] Request finished HTTP/2 GET https://localhost:7046/swagger/index.js - 304 null null 139.5617ms
+2026-03-13 12:24:09.770 +07:00 [INF] Request starting HTTP/2 GET https://localhost:7046/swagger/swagger-ui-bundle.js - null null
+2026-03-13 12:24:09.837 +07:00 [INF] Request starting HTTP/2 GET https://localhost:7046/_framework/aspnetcore-browser-refresh.js - null null
+2026-03-13 12:24:09.902 +07:00 [INF] Request starting HTTP/2 GET https://localhost:7046/_vs/browserLink - null null
+2026-03-13 12:24:09.926 +07:00 [INF] Request finished HTTP/2 GET https://localhost:7046/swagger/swagger-ui.css - 304 null null 155.9083ms
+2026-03-13 12:24:09.926 +07:00 [INF] Request finished HTTP/2 GET https://localhost:7046/swagger/swagger-ui-standalone-preset.js - 304 null null 155.2906ms
+2026-03-13 12:24:09.926 +07:00 [INF] Request finished HTTP/2 GET https://localhost:7046/swagger/index.css - 304 null null 155.8547ms
+2026-03-13 12:24:09.926 +07:00 [INF] Request finished HTTP/2 GET https://localhost:7046/swagger/swagger-ui-bundle.js - 304 null null 156.0102ms
+2026-03-13 12:24:09.940 +07:00 [INF] Request finished HTTP/2 GET https://localhost:7046/_framework/aspnetcore-browser-refresh.js - 200 14915 application/javascript; charset=utf-8 164.7088ms
+2026-03-13 12:24:09.965 +07:00 [INF] Request finished HTTP/2 GET https://localhost:7046/_vs/browserLink - 200 null text/javascript; charset=UTF-8 63.2036ms
+2026-03-13 12:24:10.111 +07:00 [INF] Request starting HTTP/2 GET https://localhost:7046/swagger/v1/swagger.json - null null
+2026-03-13 12:24:10.120 +07:00 [INF] Request finished HTTP/2 GET https://localhost:7046/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 8.7384ms
+2026-03-13 12:24:17.849 +07:00 [INF] Request starting HTTP/2 GET https://localhost:7046/health - null null
+2026-03-13 12:24:17.855 +07:00 [INF] Executing endpoint 'Health checks'
+2026-03-13 12:24:17.863 +07:00 [INF] Executed endpoint 'Health checks'
+2026-03-13 12:24:17.865 +07:00 [INF] Request finished HTTP/2 GET https://localhost:7046/health - 200 null text/plain 16.4122ms
+2026-03-13 12:24:17.898 +07:00 [INF] Request starting HTTP/2 GET https://localhost:7046/favicon.ico - null null
+2026-03-13 12:24:17.901 +07:00 [INF] Request finished HTTP/2 GET https://localhost:7046/favicon.ico - 404 0 null 3.2914ms
+2026-03-13 12:24:17.904 +07:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET https://localhost:7046/favicon.ico, Response status code: 404
+2026-03-13 12:26:04.743 +07:00 [INF] Now listening on: https://localhost:7046
+2026-03-13 12:26:04.775 +07:00 [INF] Now listening on: http://localhost:5135
+2026-03-13 12:26:04.842 +07:00 [INF] Application started. Press Ctrl+C to shut down.
+2026-03-13 12:26:04.850 +07:00 [INF] Hosting environment: Development
+2026-03-13 12:26:04.851 +07:00 [INF] Content root path: E:\Code\MyAPI\MyAPI
+2026-03-13 12:26:12.635 +07:00 [INF] Now listening on: https://localhost:7046
+2026-03-13 12:26:12.669 +07:00 [INF] Now listening on: http://localhost:5135
+2026-03-13 12:26:12.733 +07:00 [INF] Application started. Press Ctrl+C to shut down.
+2026-03-13 12:26:12.734 +07:00 [INF] Hosting environment: Development
+2026-03-13 12:26:12.735 +07:00 [INF] Content root path: E:\Code\MyAPI\MyAPI
+2026-03-13 12:26:16.279 +07:00 [INF] Request starting HTTP/2 GET https://localhost:7046/health - null null
+2026-03-13 12:26:16.381 +07:00 [INF] Executing endpoint 'Health checks'
+2026-03-13 12:26:16.389 +07:00 [INF] Executed endpoint 'Health checks'
+2026-03-13 12:26:16.393 +07:00 [INF] Request finished HTTP/2 GET https://localhost:7046/health - 200 null text/plain 121.8243ms
+2026-03-13 12:26:18.470 +07:00 [INF] Request starting HTTP/2 GET https://localhost:7046/health - null null
+2026-03-13 12:26:18.478 +07:00 [INF] Executing endpoint 'Health checks'
+2026-03-13 12:26:18.479 +07:00 [INF] Executed endpoint 'Health checks'
+2026-03-13 12:26:18.481 +07:00 [INF] Request finished HTTP/2 GET https://localhost:7046/health - 200 null text/plain 10.3842ms
+2026-03-13 12:26:19.429 +07:00 [INF] Request starting HTTP/2 GET https://localhost:7046/health - null null
+2026-03-13 12:26:19.434 +07:00 [INF] Executing endpoint 'Health checks'
+2026-03-13 12:26:19.435 +07:00 [INF] Executed endpoint 'Health checks'
+2026-03-13 12:26:19.436 +07:00 [INF] Request finished HTTP/2 GET https://localhost:7046/health - 200 null text/plain 7.1046ms
+2026-03-13 12:26:21.186 +07:00 [INF] Request starting HTTP/2 GET https://localhost:7046/_framework/aspnetcore-browser-refresh.js - null null
+2026-03-13 12:26:21.195 +07:00 [INF] Request finished HTTP/2 GET https://localhost:7046/_framework/aspnetcore-browser-refresh.js - 200 14915 application/javascript; charset=utf-8 8.7018ms
+2026-03-13 12:26:21.272 +07:00 [INF] Request starting HTTP/2 GET https://localhost:7046/swagger/v1/swagger.json - null null
+2026-03-13 12:26:21.282 +07:00 [INF] Request finished HTTP/2 GET https://localhost:7046/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 9.9287ms
+2026-03-13 12:26:22.186 +07:00 [INF] Request starting HTTP/2 GET https://localhost:7046/swagger/index.html - null null
+2026-03-13 12:26:22.231 +07:00 [INF] Request finished HTTP/2 GET https://localhost:7046/swagger/index.html - 304 null null 44.2647ms
+2026-03-13 12:26:22.239 +07:00 [INF] Request starting HTTP/2 GET https://localhost:7046/swagger/swagger-ui.css - null null
+2026-03-13 12:26:22.268 +07:00 [INF] Request starting HTTP/2 GET https://localhost:7046/swagger/index.js - null null
+2026-03-13 12:26:22.239 +07:00 [INF] Request starting HTTP/2 GET https://localhost:7046/swagger/swagger-ui-bundle.js - null null
+2026-03-13 12:26:22.398 +07:00 [INF] Request finished HTTP/2 GET https://localhost:7046/swagger/index.js - 304 null null 130.0002ms
+2026-03-13 12:26:22.239 +07:00 [INF] Request starting HTTP/2 GET https://localhost:7046/swagger/index.css - null null
+2026-03-13 12:26:22.239 +07:00 [INF] Request starting HTTP/2 GET https://localhost:7046/swagger/swagger-ui-standalone-preset.js - null null
+2026-03-13 12:26:22.268 +07:00 [INF] Request starting HTTP/2 GET https://localhost:7046/_framework/aspnetcore-browser-refresh.js - null null
+2026-03-13 12:26:22.332 +07:00 [INF] Request starting HTTP/2 GET https://localhost:7046/_vs/browserLink - null null
+2026-03-13 12:26:22.421 +07:00 [INF] Request finished HTTP/2 GET https://localhost:7046/swagger/swagger-ui.css - 304 null null 182.5787ms
+2026-03-13 12:26:22.421 +07:00 [INF] Request finished HTTP/2 GET https://localhost:7046/swagger/index.css - 304 null null 182.4343ms
+2026-03-13 12:26:22.421 +07:00 [INF] Request finished HTTP/2 GET https://localhost:7046/swagger/swagger-ui-bundle.js - 304 null null 182.5874ms
+2026-03-13 12:26:22.421 +07:00 [INF] Request finished HTTP/2 GET https://localhost:7046/swagger/swagger-ui-standalone-preset.js - 304 null null 182.2913ms
+2026-03-13 12:26:22.431 +07:00 [INF] Request finished HTTP/2 GET https://localhost:7046/_framework/aspnetcore-browser-refresh.js - 200 14915 application/javascript; charset=utf-8 162.8605ms
+2026-03-13 12:26:22.452 +07:00 [INF] Request finished HTTP/2 GET https://localhost:7046/_vs/browserLink - 200 null text/javascript; charset=UTF-8 120.9079ms
+2026-03-13 12:26:22.487 +07:00 [INF] Request starting HTTP/2 GET https://localhost:7046/swagger/v1/swagger.json - null null
+2026-03-13 12:26:22.491 +07:00 [INF] Request starting HTTP/2 GET https://localhost:7046/swagger/favicon-32x32.png - null null
+2026-03-13 12:26:22.493 +07:00 [INF] Request finished HTTP/2 GET https://localhost:7046/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 5.5143ms
+2026-03-13 12:26:22.494 +07:00 [INF] Request finished HTTP/2 GET https://localhost:7046/swagger/favicon-32x32.png - 304 null null 2.8362ms
+2026-03-13 12:37:22.196 +07:00 [ERR] Failed executing DbCommand (52ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT "MigrationId", "ProductVersion"
+FROM "__EFMigrationsHistory"
+ORDER BY "MigrationId";
+2026-03-13 12:37:22.991 +07:00 [INF] Executed DbCommand (103ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE IF NOT EXISTS "__EFMigrationsHistory" (
+    "MigrationId" character varying(150) NOT NULL,
+    "ProductVersion" character varying(32) NOT NULL,
+    CONSTRAINT "PK___EFMigrationsHistory" PRIMARY KEY ("MigrationId")
+);
+2026-03-13 12:37:23.001 +07:00 [INF] Acquiring an exclusive lock for migration application. See https://aka.ms/efcore-docs-migrations-lock for more information if this takes too long.
+2026-03-13 12:37:23.044 +07:00 [INF] Executed DbCommand (41ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+LOCK TABLE "__EFMigrationsHistory" IN ACCESS EXCLUSIVE MODE
+2026-03-13 12:37:23.090 +07:00 [INF] Executed DbCommand (42ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT "MigrationId", "ProductVersion"
+FROM "__EFMigrationsHistory"
+ORDER BY "MigrationId";
+2026-03-13 12:37:23.103 +07:00 [INF] Applying migration '20260313053713_InitDb'.
+2026-03-13 12:37:23.154 +07:00 [INF] Executed DbCommand (44ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE "Users" (
+    "Id" integer GENERATED BY DEFAULT AS IDENTITY,
+    "Username" text NOT NULL,
+    "Password" text NOT NULL,
+    CONSTRAINT "PK_Users" PRIMARY KEY ("Id")
+);
+2026-03-13 12:37:23.199 +07:00 [INF] Executed DbCommand (40ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO "__EFMigrationsHistory" ("MigrationId", "ProductVersion")
+VALUES ('20260313053713_InitDb', '9.0.0');
+2026-03-13 12:48:08.220 +07:00 [ERR] An error occurred using the connection to database 'postgres' on server 'tcp://db.dnguwemigvflpzveaetm.supabase.co:5432'.
+2026-03-13 12:56:39.523 +07:00 [INF] Executed DbCommand (56ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT "MigrationId", "ProductVersion"
+FROM "__EFMigrationsHistory"
+ORDER BY "MigrationId";
+2026-03-13 12:56:40.038 +07:00 [INF] Executed DbCommand (42ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE IF NOT EXISTS "__EFMigrationsHistory" (
+    "MigrationId" character varying(150) NOT NULL,
+    "ProductVersion" character varying(32) NOT NULL,
+    CONSTRAINT "PK___EFMigrationsHistory" PRIMARY KEY ("MigrationId")
+);
+2026-03-13 12:56:40.048 +07:00 [INF] Acquiring an exclusive lock for migration application. See https://aka.ms/efcore-docs-migrations-lock for more information if this takes too long.
+2026-03-13 12:56:40.102 +07:00 [INF] Executed DbCommand (50ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+LOCK TABLE "__EFMigrationsHistory" IN ACCESS EXCLUSIVE MODE
+2026-03-13 12:56:40.146 +07:00 [INF] Executed DbCommand (39ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT "MigrationId", "ProductVersion"
+FROM "__EFMigrationsHistory"
+ORDER BY "MigrationId";
+2026-03-13 12:56:40.153 +07:00 [INF] No migrations were applied. The database is already up to date.
+2026-03-13 12:56:40.412 +07:00 [INF] Executed DbCommand (41ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "Users" AS u)
+2026-03-13 12:56:40.554 +07:00 [INF] Now listening on: https://localhost:7046
+2026-03-13 12:56:40.555 +07:00 [INF] Now listening on: http://localhost:5135
+2026-03-13 12:56:40.626 +07:00 [INF] Application started. Press Ctrl+C to shut down.
+2026-03-13 12:56:40.628 +07:00 [INF] Hosting environment: Development
+2026-03-13 12:56:40.629 +07:00 [INF] Content root path: E:\Code\MyAPI\MyAPI
+2026-03-13 12:56:50.293 +07:00 [INF] Request starting HTTP/2 GET https://localhost:7046/swagger/index.html - null null
+2026-03-13 12:56:50.437 +07:00 [INF] Request finished HTTP/2 GET https://localhost:7046/swagger/index.html - 304 null null 151.4884ms
+2026-03-13 12:56:50.448 +07:00 [INF] Request starting HTTP/2 GET https://localhost:7046/swagger/index.js - null null
+2026-03-13 12:56:50.448 +07:00 [INF] Request starting HTTP/2 GET https://localhost:7046/swagger/swagger-ui.css - null null
+2026-03-13 12:56:50.449 +07:00 [INF] Request starting HTTP/2 GET https://localhost:7046/swagger/swagger-ui-standalone-preset.js - null null
+2026-03-13 12:56:50.614 +07:00 [INF] Request finished HTTP/2 GET https://localhost:7046/swagger/index.js - 304 null null 165.7931ms
+2026-03-13 12:56:50.448 +07:00 [INF] Request starting HTTP/2 GET https://localhost:7046/swagger/swagger-ui-bundle.js - null null
+2026-03-13 12:56:50.448 +07:00 [INF] Request starting HTTP/2 GET https://localhost:7046/swagger/index.css - null null
+2026-03-13 12:56:50.537 +07:00 [INF] Request starting HTTP/2 GET https://localhost:7046/_framework/aspnetcore-browser-refresh.js - null null
+2026-03-13 12:56:50.605 +07:00 [INF] Request starting HTTP/2 GET https://localhost:7046/_vs/browserLink - null null
+2026-03-13 12:56:50.659 +07:00 [INF] Request finished HTTP/2 GET https://localhost:7046/swagger/index.css - 304 null null 211.1662ms
+2026-03-13 12:56:50.659 +07:00 [INF] Request finished HTTP/2 GET https://localhost:7046/swagger/swagger-ui.css - 304 null null 211.1684ms
+2026-03-13 12:56:50.659 +07:00 [INF] Request finished HTTP/2 GET https://localhost:7046/swagger/swagger-ui-standalone-preset.js - 304 null null 210.7705ms
+2026-03-13 12:56:50.662 +07:00 [INF] Request finished HTTP/2 GET https://localhost:7046/swagger/swagger-ui-bundle.js - 304 null null 213.7324ms
+2026-03-13 12:56:50.677 +07:00 [INF] Request finished HTTP/2 GET https://localhost:7046/_framework/aspnetcore-browser-refresh.js - 200 14915 application/javascript; charset=utf-8 223.0748ms
+2026-03-13 12:56:50.688 +07:00 [INF] Request finished HTTP/2 GET https://localhost:7046/_vs/browserLink - 200 null text/javascript; charset=UTF-8 82.812ms
+2026-03-13 12:56:50.838 +07:00 [INF] Request starting HTTP/2 GET https://localhost:7046/swagger/v1/swagger.json - null null
+2026-03-13 12:56:50.840 +07:00 [INF] Request starting HTTP/2 GET https://localhost:7046/swagger/favicon-32x32.png - null null
+2026-03-13 12:56:50.844 +07:00 [INF] Request finished HTTP/2 GET https://localhost:7046/swagger/favicon-32x32.png - 304 null null 4.2459ms
+2026-03-13 12:56:50.850 +07:00 [INF] Request finished HTTP/2 GET https://localhost:7046/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 11.8306ms
+2026-03-13 12:56:56.783 +07:00 [INF] Request starting HTTP/2 POST https://localhost:7046/api/Auth/login - application/json 50
+2026-03-13 12:56:56.793 +07:00 [INF] Executing endpoint 'MyAPI.Controllers.AuthController.Login (MyAPI)'
+2026-03-13 12:56:56.812 +07:00 [INF] Route matched with {action = "Login", controller = "Auth"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Login(MyAPI.Models.LoginRequest) on controller MyAPI.Controllers.AuthController (MyAPI).
+2026-03-13 12:56:56.996 +07:00 [INF] Executed DbCommand (47ms) [Parameters=[@__username_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT u."Id", u."Password", u."Username"
+FROM "Users" AS u
+WHERE u."Username" = @__username_0
+LIMIT 1
+2026-03-13 12:56:57.004 +07:00 [INF] Executing UnauthorizedObjectResult, writing value of type '<>f__AnonymousType0`2[[System.Boolean, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2026-03-13 12:56:57.012 +07:00 [INF] Executed action MyAPI.Controllers.AuthController.Login (MyAPI) in 195.4986ms
+2026-03-13 12:56:57.014 +07:00 [INF] Executed endpoint 'MyAPI.Controllers.AuthController.Login (MyAPI)'
+2026-03-13 12:56:57.019 +07:00 [INF] Request finished HTTP/2 POST https://localhost:7046/api/Auth/login - 401 null application/json; charset=utf-8 235.7995ms
+2026-03-13 12:57:10.670 +07:00 [INF] Request starting HTTP/2 POST https://localhost:7046/api/Auth/login - application/json 49
+2026-03-13 12:57:10.674 +07:00 [INF] Executing endpoint 'MyAPI.Controllers.AuthController.Login (MyAPI)'
+2026-03-13 12:57:10.676 +07:00 [INF] Route matched with {action = "Login", controller = "Auth"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Login(MyAPI.Models.LoginRequest) on controller MyAPI.Controllers.AuthController (MyAPI).
+2026-03-13 12:57:10.759 +07:00 [INF] Executed DbCommand (38ms) [Parameters=[@__username_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT u."Id", u."Password", u."Username"
+FROM "Users" AS u
+WHERE u."Username" = @__username_0
+LIMIT 1
+2026-03-13 12:57:11.098 +07:00 [INF] Executing UnauthorizedObjectResult, writing value of type '<>f__AnonymousType0`2[[System.Boolean, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2026-03-13 12:57:11.099 +07:00 [INF] Executed action MyAPI.Controllers.AuthController.Login (MyAPI) in 421.0613ms
+2026-03-13 12:57:11.100 +07:00 [INF] Executed endpoint 'MyAPI.Controllers.AuthController.Login (MyAPI)'
+2026-03-13 12:57:11.101 +07:00 [INF] Request finished HTTP/2 POST https://localhost:7046/api/Auth/login - 401 null application/json; charset=utf-8 431.489ms
+2026-03-13 12:57:21.685 +07:00 [INF] Request starting HTTP/2 POST https://localhost:7046/api/Auth/login - application/json 49
+2026-03-13 12:57:21.688 +07:00 [INF] Executing endpoint 'MyAPI.Controllers.AuthController.Login (MyAPI)'
+2026-03-13 12:57:21.689 +07:00 [INF] Route matched with {action = "Login", controller = "Auth"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Login(MyAPI.Models.LoginRequest) on controller MyAPI.Controllers.AuthController (MyAPI).
+2026-03-13 12:57:21.734 +07:00 [INF] Executed DbCommand (40ms) [Parameters=[@__username_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT u."Id", u."Password", u."Username"
+FROM "Users" AS u
+WHERE u."Username" = @__username_0
+LIMIT 1
+2026-03-13 12:57:21.852 +07:00 [INF] Executing UnauthorizedObjectResult, writing value of type '<>f__AnonymousType0`2[[System.Boolean, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2026-03-13 12:57:21.855 +07:00 [INF] Executed action MyAPI.Controllers.AuthController.Login (MyAPI) in 164.843ms
+2026-03-13 12:57:21.857 +07:00 [INF] Executed endpoint 'MyAPI.Controllers.AuthController.Login (MyAPI)'
+2026-03-13 12:57:21.859 +07:00 [INF] Request finished HTTP/2 POST https://localhost:7046/api/Auth/login - 401 null application/json; charset=utf-8 173.4027ms
+2026-03-13 12:57:23.826 +07:00 [INF] Request starting HTTP/2 POST https://localhost:7046/api/Auth/login - application/json 49
+2026-03-13 12:57:23.828 +07:00 [INF] Executing endpoint 'MyAPI.Controllers.AuthController.Login (MyAPI)'
+2026-03-13 12:57:23.828 +07:00 [INF] Route matched with {action = "Login", controller = "Auth"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Login(MyAPI.Models.LoginRequest) on controller MyAPI.Controllers.AuthController (MyAPI).
+2026-03-13 12:57:23.870 +07:00 [INF] Executed DbCommand (40ms) [Parameters=[@__username_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT u."Id", u."Password", u."Username"
+FROM "Users" AS u
+WHERE u."Username" = @__username_0
+LIMIT 1
+2026-03-13 12:57:23.992 +07:00 [INF] Executing UnauthorizedObjectResult, writing value of type '<>f__AnonymousType0`2[[System.Boolean, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2026-03-13 12:57:23.993 +07:00 [INF] Executed action MyAPI.Controllers.AuthController.Login (MyAPI) in 163.8904ms
+2026-03-13 12:57:23.995 +07:00 [INF] Executed endpoint 'MyAPI.Controllers.AuthController.Login (MyAPI)'
+2026-03-13 12:57:23.996 +07:00 [INF] Request finished HTTP/2 POST https://localhost:7046/api/Auth/login - 401 null application/json; charset=utf-8 169.9199ms
+2026-03-13 13:04:57.471 +07:00 [ERR] An error occurred using the connection to database 'postgres' on server 'tcp://db.dnguwemigvflpzveaetm.supabase.co:5432'.
+2026-03-13 13:08:10.273 +07:00 [INF] Executed DbCommand (50ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT "MigrationId", "ProductVersion"
+FROM "__EFMigrationsHistory"
+ORDER BY "MigrationId";
+2026-03-13 13:08:10.747 +07:00 [INF] Executed DbCommand (40ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE IF NOT EXISTS "__EFMigrationsHistory" (
+    "MigrationId" character varying(150) NOT NULL,
+    "ProductVersion" character varying(32) NOT NULL,
+    CONSTRAINT "PK___EFMigrationsHistory" PRIMARY KEY ("MigrationId")
+);
+2026-03-13 13:08:10.757 +07:00 [INF] Acquiring an exclusive lock for migration application. See https://aka.ms/efcore-docs-migrations-lock for more information if this takes too long.
+2026-03-13 13:08:10.797 +07:00 [INF] Executed DbCommand (39ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+LOCK TABLE "__EFMigrationsHistory" IN ACCESS EXCLUSIVE MODE
+2026-03-13 13:08:10.841 +07:00 [INF] Executed DbCommand (40ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT "MigrationId", "ProductVersion"
+FROM "__EFMigrationsHistory"
+ORDER BY "MigrationId";
+2026-03-13 13:08:10.850 +07:00 [INF] No migrations were applied. The database is already up to date.
+2026-03-13 13:08:11.038 +07:00 [INF] Executed DbCommand (39ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "Users" AS u)
+2026-03-13 13:08:11.500 +07:00 [INF] Executed DbCommand (46ms) [Parameters=[@p0='?', @p1='?', @p2='?', @p3='?'], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO "Users" ("Password", "Username")
+VALUES (@p0, @p1)
+RETURNING "Id";
+INSERT INTO "Users" ("Password", "Username")
+VALUES (@p2, @p3)
+RETURNING "Id";
+2026-03-13 13:08:11.589 +07:00 [INF] Now listening on: http://localhost:5135
+2026-03-13 13:08:11.594 +07:00 [INF] Application started. Press Ctrl+C to shut down.
+2026-03-13 13:08:11.595 +07:00 [INF] Hosting environment: Development
+2026-03-13 13:08:11.597 +07:00 [INF] Content root path: E:\Code\MyAPI\MyAPI
+2026-03-13 13:08:31.635 +07:00 [INF] Application is shutting down...
+2026-03-13 13:09:16.222 +07:00 [INF] Executed DbCommand (50ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT "MigrationId", "ProductVersion"
+FROM "__EFMigrationsHistory"
+ORDER BY "MigrationId";
+2026-03-13 13:09:16.734 +07:00 [INF] Executed DbCommand (41ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE IF NOT EXISTS "__EFMigrationsHistory" (
+    "MigrationId" character varying(150) NOT NULL,
+    "ProductVersion" character varying(32) NOT NULL,
+    CONSTRAINT "PK___EFMigrationsHistory" PRIMARY KEY ("MigrationId")
+);
+2026-03-13 13:09:16.743 +07:00 [INF] Acquiring an exclusive lock for migration application. See https://aka.ms/efcore-docs-migrations-lock for more information if this takes too long.
+2026-03-13 13:09:16.783 +07:00 [INF] Executed DbCommand (39ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+LOCK TABLE "__EFMigrationsHistory" IN ACCESS EXCLUSIVE MODE
+2026-03-13 13:09:16.823 +07:00 [INF] Executed DbCommand (38ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT "MigrationId", "ProductVersion"
+FROM "__EFMigrationsHistory"
+ORDER BY "MigrationId";
+2026-03-13 13:09:16.830 +07:00 [INF] No migrations were applied. The database is already up to date.
+2026-03-13 13:09:17.087 +07:00 [INF] Executed DbCommand (40ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "Users" AS u)
+2026-03-13 13:09:17.251 +07:00 [INF] Now listening on: https://localhost:7046
+2026-03-13 13:09:17.253 +07:00 [INF] Now listening on: http://localhost:5135
+2026-03-13 13:09:17.319 +07:00 [INF] Application started. Press Ctrl+C to shut down.
+2026-03-13 13:09:17.322 +07:00 [INF] Hosting environment: Development
+2026-03-13 13:09:17.322 +07:00 [INF] Content root path: E:\Code\MyAPI\MyAPI
+2026-03-13 13:09:25.072 +07:00 [INF] Application is shutting down...
+2026-03-13 13:09:30.244 +07:00 [INF] Executed DbCommand (55ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT "MigrationId", "ProductVersion"
+FROM "__EFMigrationsHistory"
+ORDER BY "MigrationId";
+2026-03-13 13:09:31.057 +07:00 [INF] Executed DbCommand (42ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE IF NOT EXISTS "__EFMigrationsHistory" (
+    "MigrationId" character varying(150) NOT NULL,
+    "ProductVersion" character varying(32) NOT NULL,
+    CONSTRAINT "PK___EFMigrationsHistory" PRIMARY KEY ("MigrationId")
+);
+2026-03-13 13:09:31.067 +07:00 [INF] Acquiring an exclusive lock for migration application. See https://aka.ms/efcore-docs-migrations-lock for more information if this takes too long.
+2026-03-13 13:09:31.107 +07:00 [INF] Executed DbCommand (39ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+LOCK TABLE "__EFMigrationsHistory" IN ACCESS EXCLUSIVE MODE
+2026-03-13 13:09:31.147 +07:00 [INF] Executed DbCommand (37ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT "MigrationId", "ProductVersion"
+FROM "__EFMigrationsHistory"
+ORDER BY "MigrationId";
+2026-03-13 13:09:31.155 +07:00 [INF] No migrations were applied. The database is already up to date.
+2026-03-13 13:09:31.407 +07:00 [INF] Executed DbCommand (40ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "Users" AS u)
+2026-03-13 13:09:31.624 +07:00 [INF] Now listening on: https://localhost:7046
+2026-03-13 13:09:31.625 +07:00 [INF] Now listening on: http://localhost:5135
+2026-03-13 13:09:31.712 +07:00 [INF] Application started. Press Ctrl+C to shut down.
+2026-03-13 13:09:31.713 +07:00 [INF] Hosting environment: Development
+2026-03-13 13:09:31.714 +07:00 [INF] Content root path: E:\Code\MyAPI\MyAPI
+2026-03-13 13:09:38.123 +07:00 [INF] Request starting HTTP/2 GET https://localhost:7046/swagger/index.html - null null
+2026-03-13 13:09:38.284 +07:00 [INF] Request finished HTTP/2 GET https://localhost:7046/swagger/index.html - 304 null null 170.8161ms
+2026-03-13 13:09:38.298 +07:00 [INF] Request starting HTTP/2 GET https://localhost:7046/swagger/swagger-ui-bundle.js - null null
+2026-03-13 13:09:38.299 +07:00 [INF] Request starting HTTP/2 GET https://localhost:7046/swagger/index.js - null null
+2026-03-13 13:09:38.299 +07:00 [INF] Request starting HTTP/2 GET https://localhost:7046/swagger/swagger-ui-standalone-preset.js - null null
+2026-03-13 13:09:38.298 +07:00 [INF] Request starting HTTP/2 GET https://localhost:7046/swagger/swagger-ui.css - null null
+2026-03-13 13:09:38.298 +07:00 [INF] Request starting HTTP/2 GET https://localhost:7046/swagger/index.css - null null
+2026-03-13 13:09:38.309 +07:00 [INF] Request starting HTTP/2 GET https://localhost:7046/_framework/aspnetcore-browser-refresh.js - null null
+2026-03-13 13:09:38.366 +07:00 [INF] Request starting HTTP/2 GET https://localhost:7046/_vs/browserLink - null null
+2026-03-13 13:09:38.395 +07:00 [INF] Request finished HTTP/2 GET https://localhost:7046/swagger/index.js - 304 null null 76.4546ms
+2026-03-13 13:09:38.410 +07:00 [INF] Request finished HTTP/2 GET https://localhost:7046/swagger/index.css - 304 null null 111.7975ms
+2026-03-13 13:09:38.410 +07:00 [INF] Request finished HTTP/2 GET https://localhost:7046/swagger/swagger-ui-standalone-preset.js - 304 null null 111.4497ms
+2026-03-13 13:09:38.416 +07:00 [INF] Request finished HTTP/2 GET https://localhost:7046/swagger/swagger-ui-bundle.js - 304 null null 116.5839ms
+2026-03-13 13:09:38.410 +07:00 [INF] Request finished HTTP/2 GET https://localhost:7046/swagger/swagger-ui.css - 304 null null 111.8077ms
+2026-03-13 13:09:38.453 +07:00 [INF] Request finished HTTP/2 GET https://localhost:7046/_framework/aspnetcore-browser-refresh.js - 200 14915 application/javascript; charset=utf-8 148.5475ms
+2026-03-13 13:09:38.473 +07:00 [INF] Request finished HTTP/2 GET https://localhost:7046/_vs/browserLink - 200 null text/javascript; charset=UTF-8 106.6922ms
+2026-03-13 13:09:38.640 +07:00 [INF] Request starting HTTP/2 GET https://localhost:7046/swagger/v1/swagger.json - null null
+2026-03-13 13:09:38.641 +07:00 [INF] Request starting HTTP/2 GET https://localhost:7046/swagger/favicon-32x32.png - null null
+2026-03-13 13:09:38.646 +07:00 [INF] Request finished HTTP/2 GET https://localhost:7046/swagger/favicon-32x32.png - 304 null null 4.7752ms
+2026-03-13 13:09:38.653 +07:00 [INF] Request finished HTTP/2 GET https://localhost:7046/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 13.5688ms
+2026-03-13 13:09:44.833 +07:00 [INF] Request starting HTTP/2 GET https://localhost:7046/WeatherForecast - null null
+2026-03-13 13:09:44.841 +07:00 [INF] Executing endpoint 'MyAPI.Controllers.WeatherForecastController.Get (MyAPI)'
+2026-03-13 13:09:44.855 +07:00 [INF] Route matched with {action = "Get", controller = "WeatherForecast"}. Executing controller action with signature System.Collections.Generic.IEnumerable`1[MyAPI.WeatherForecast] Get() on controller MyAPI.Controllers.WeatherForecastController (MyAPI).
+2026-03-13 13:09:44.869 +07:00 [INF] Executing ObjectResult, writing value of type 'MyAPI.WeatherForecast[]'.
+2026-03-13 13:09:44.887 +07:00 [INF] Executed action MyAPI.Controllers.WeatherForecastController.Get (MyAPI) in 28.1695ms
+2026-03-13 13:09:44.890 +07:00 [INF] Executed endpoint 'MyAPI.Controllers.WeatherForecastController.Get (MyAPI)'
+2026-03-13 13:09:44.892 +07:00 [INF] Request finished HTTP/2 GET https://localhost:7046/WeatherForecast - 200 null application/json; charset=utf-8 59.0705ms
+2026-03-13 13:10:01.252 +07:00 [INF] Request starting HTTP/2 POST https://localhost:7046/api/Auth/login - application/json 49
+2026-03-13 13:10:01.255 +07:00 [INF] Executing endpoint 'MyAPI.Controllers.AuthController.Login (MyAPI)'
+2026-03-13 13:10:01.263 +07:00 [INF] Route matched with {action = "Login", controller = "Auth"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Login(MyAPI.Models.LoginRequest) on controller MyAPI.Controllers.AuthController (MyAPI).
+2026-03-13 13:10:01.457 +07:00 [INF] Executed DbCommand (45ms) [Parameters=[@__username_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT u."Id", u."Password", u."Username"
+FROM "Users" AS u
+WHERE u."Username" = @__username_0
+LIMIT 1
+2026-03-13 13:10:02.516 +07:00 [INF] Executing OkObjectResult, writing value of type '<>f__AnonymousType1`4[[System.String, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Int32, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Boolean, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2026-03-13 13:10:02.520 +07:00 [INF] Executed action MyAPI.Controllers.AuthController.Login (MyAPI) in 1255.7592ms
+2026-03-13 13:10:02.521 +07:00 [INF] Executed endpoint 'MyAPI.Controllers.AuthController.Login (MyAPI)'
+2026-03-13 13:10:02.526 +07:00 [INF] Request finished HTTP/2 POST https://localhost:7046/api/Auth/login - 200 null application/json; charset=utf-8 1274.4844ms
