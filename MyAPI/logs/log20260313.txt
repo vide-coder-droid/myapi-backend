@@ -638,3 +638,233 @@ SELECT EXISTS (
 2026-03-13 14:22:36.104 +07:00 [INF] Request finished HTTP/2 GET https://localhost:7046/_vs/browserLink - 200 null text/javascript; charset=UTF-8 19.9584ms
 2026-03-13 14:22:36.156 +07:00 [INF] Request starting HTTP/2 GET https://localhost:7046/swagger/v1/swagger.json - null null
 2026-03-13 14:22:36.172 +07:00 [INF] Request finished HTTP/2 GET https://localhost:7046/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 15.8181ms
+2026-03-13 14:26:42.834 +07:00 [INF] Executed DbCommand (52ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT "MigrationId", "ProductVersion"
+FROM "__EFMigrationsHistory"
+ORDER BY "MigrationId";
+2026-03-13 14:26:43.337 +07:00 [INF] Executed DbCommand (47ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE IF NOT EXISTS "__EFMigrationsHistory" (
+    "MigrationId" character varying(150) NOT NULL,
+    "ProductVersion" character varying(32) NOT NULL,
+    CONSTRAINT "PK___EFMigrationsHistory" PRIMARY KEY ("MigrationId")
+);
+2026-03-13 14:26:43.345 +07:00 [INF] Acquiring an exclusive lock for migration application. See https://aka.ms/efcore-docs-migrations-lock for more information if this takes too long.
+2026-03-13 14:26:43.385 +07:00 [INF] Executed DbCommand (39ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+LOCK TABLE "__EFMigrationsHistory" IN ACCESS EXCLUSIVE MODE
+2026-03-13 14:26:43.425 +07:00 [INF] Executed DbCommand (37ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT "MigrationId", "ProductVersion"
+FROM "__EFMigrationsHistory"
+ORDER BY "MigrationId";
+2026-03-13 14:26:43.432 +07:00 [INF] No migrations were applied. The database is already up to date.
+2026-03-13 14:26:43.698 +07:00 [INF] Executed DbCommand (41ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "Users" AS u)
+2026-03-13 14:26:43.724 +07:00 [INF] User profile is available. Using 'C:\Users\LAPTOP MSI\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2026-03-13 14:26:43.918 +07:00 [INF] Now listening on: https://localhost:7046
+2026-03-13 14:26:43.919 +07:00 [INF] Now listening on: http://localhost:5135
+2026-03-13 14:26:43.985 +07:00 [INF] Application started. Press Ctrl+C to shut down.
+2026-03-13 14:26:43.988 +07:00 [INF] Hosting environment: Development
+2026-03-13 14:26:43.988 +07:00 [INF] Content root path: E:\Code\MyAPI\MyAPI
+2026-03-13 14:26:45.170 +07:00 [INF] Request starting HTTP/2 GET https://localhost:7046/swagger/index.html - null null
+2026-03-13 14:26:45.328 +07:00 [INF] Request finished HTTP/2 GET https://localhost:7046/swagger/index.html - 200 null text/html;charset=utf-8 165.5341ms
+2026-03-13 14:26:45.329 +07:00 [INF] Request starting HTTP/2 GET https://localhost:7046/_vs/browserLink - null null
+2026-03-13 14:26:45.329 +07:00 [INF] Request starting HTTP/2 GET https://localhost:7046/swagger/index.js - null null
+2026-03-13 14:26:45.329 +07:00 [INF] Request starting HTTP/2 GET https://localhost:7046/_framework/aspnetcore-browser-refresh.js - null null
+2026-03-13 14:26:45.345 +07:00 [INF] Request finished HTTP/2 GET https://localhost:7046/swagger/index.js - 200 null application/javascript;charset=utf-8 16.2073ms
+2026-03-13 14:26:45.363 +07:00 [INF] Request finished HTTP/2 GET https://localhost:7046/_framework/aspnetcore-browser-refresh.js - 200 14915 application/javascript; charset=utf-8 33.9707ms
+2026-03-13 14:26:45.383 +07:00 [INF] Request finished HTTP/2 GET https://localhost:7046/_vs/browserLink - 200 null text/javascript; charset=UTF-8 54.0317ms
+2026-03-13 14:26:45.511 +07:00 [INF] Request starting HTTP/2 GET https://localhost:7046/swagger/v1/swagger.json - null null
+2026-03-13 14:26:45.522 +07:00 [INF] Request finished HTTP/2 GET https://localhost:7046/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 10.7523ms
+2026-03-13 14:36:49.011 +07:00 [INF] Executed DbCommand (51ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT "MigrationId", "ProductVersion"
+FROM "__EFMigrationsHistory"
+ORDER BY "MigrationId";
+2026-03-13 14:36:49.524 +07:00 [INF] Executed DbCommand (47ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE IF NOT EXISTS "__EFMigrationsHistory" (
+    "MigrationId" character varying(150) NOT NULL,
+    "ProductVersion" character varying(32) NOT NULL,
+    CONSTRAINT "PK___EFMigrationsHistory" PRIMARY KEY ("MigrationId")
+);
+2026-03-13 14:36:49.533 +07:00 [INF] Acquiring an exclusive lock for migration application. See https://aka.ms/efcore-docs-migrations-lock for more information if this takes too long.
+2026-03-13 14:36:49.574 +07:00 [INF] Executed DbCommand (41ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+LOCK TABLE "__EFMigrationsHistory" IN ACCESS EXCLUSIVE MODE
+2026-03-13 14:36:49.618 +07:00 [INF] Executed DbCommand (40ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT "MigrationId", "ProductVersion"
+FROM "__EFMigrationsHistory"
+ORDER BY "MigrationId";
+2026-03-13 14:36:49.626 +07:00 [INF] No migrations were applied. The database is already up to date.
+2026-03-13 14:36:49.870 +07:00 [INF] Executed DbCommand (41ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "Users" AS u)
+2026-03-13 14:36:49.902 +07:00 [INF] User profile is available. Using 'C:\Users\LAPTOP MSI\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2026-03-13 14:36:50.085 +07:00 [INF] Now listening on: https://localhost:7046
+2026-03-13 14:36:50.086 +07:00 [INF] Now listening on: http://localhost:5135
+2026-03-13 14:36:50.167 +07:00 [INF] Application started. Press Ctrl+C to shut down.
+2026-03-13 14:36:50.169 +07:00 [INF] Hosting environment: Development
+2026-03-13 14:36:50.170 +07:00 [INF] Content root path: E:\Code\MyAPI\MyAPI
+2026-03-13 14:37:03.366 +07:00 [INF] Request starting HTTP/2 POST https://localhost:7046/api/Auth/login - application/json 53
+2026-03-13 14:37:04.340 +07:00 [INF] Executing endpoint 'MyAPI.Controllers.AuthController.Login (MyAPI)'
+2026-03-13 14:37:04.356 +07:00 [INF] Route matched with {action = "Login", controller = "Auth"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Login(MyAPI.Models.LoginRequest) on controller MyAPI.Controllers.AuthController (MyAPI).
+2026-03-13 14:37:04.552 +07:00 [INF] Executed DbCommand (65ms) [Parameters=[@__username_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT u."Id", u."Password", u."Username"
+FROM "Users" AS u
+WHERE u."Username" = @__username_0
+LIMIT 1
+2026-03-13 14:37:04.938 +07:00 [INF] Executing OkObjectResult, writing value of type '<>f__AnonymousType1`4[[System.String, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Int32, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Boolean, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2026-03-13 14:37:04.948 +07:00 [INF] Executed action MyAPI.Controllers.AuthController.Login (MyAPI) in 586.9437ms
+2026-03-13 14:37:04.951 +07:00 [INF] Executed endpoint 'MyAPI.Controllers.AuthController.Login (MyAPI)'
+2026-03-13 14:37:04.958 +07:00 [INF] Request finished HTTP/2 POST https://localhost:7046/api/Auth/login - 200 null application/json; charset=utf-8 1600.1029ms
+2026-03-13 14:37:17.056 +07:00 [INF] Request starting HTTP/2 GET https://localhost:7046/swagger/index.html - null null
+2026-03-13 14:37:17.184 +07:00 [INF] Request finished HTTP/2 GET https://localhost:7046/swagger/index.html - 200 null text/html;charset=utf-8 128.7656ms
+2026-03-13 14:37:17.187 +07:00 [INF] Request starting HTTP/2 GET https://localhost:7046/swagger/index.js - null null
+2026-03-13 14:37:17.187 +07:00 [INF] Request starting HTTP/2 GET https://localhost:7046/_vs/browserLink - null null
+2026-03-13 14:37:17.187 +07:00 [INF] Request starting HTTP/2 GET https://localhost:7046/_framework/aspnetcore-browser-refresh.js - null null
+2026-03-13 14:37:17.195 +07:00 [INF] Request finished HTTP/2 GET https://localhost:7046/swagger/index.js - 200 null application/javascript;charset=utf-8 8.374ms
+2026-03-13 14:37:17.209 +07:00 [INF] Request finished HTTP/2 GET https://localhost:7046/_framework/aspnetcore-browser-refresh.js - 200 14915 application/javascript; charset=utf-8 21.735ms
+2026-03-13 14:37:17.223 +07:00 [INF] Request finished HTTP/2 GET https://localhost:7046/_vs/browserLink - 200 null text/javascript; charset=UTF-8 35.9254ms
+2026-03-13 14:37:17.378 +07:00 [INF] Request starting HTTP/2 GET https://localhost:7046/swagger/v1/swagger.json - null null
+2026-03-13 14:37:17.389 +07:00 [INF] Request finished HTTP/2 GET https://localhost:7046/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 10.5573ms
+2026-03-13 14:37:52.457 +07:00 [INF] Request starting HTTP/2 POST https://localhost:7046/api/Auth/login - application/json 49
+2026-03-13 14:37:52.523 +07:00 [INF] Failed to validate the token.
+Microsoft.IdentityModel.Tokens.SecurityTokenSignatureKeyNotFoundException: IDX10517: Signature validation failed. The token's kid is missing. Keys tried: 'Microsoft.IdentityModel.Tokens.SymmetricSecurityKey, KeyId: '', InternalId: 'RtElIW7E4Q6a_6IJqaxLFcOGYYKbKVz_rkxX_V9cNCw'. , KeyId: \r\n'.
+Number of keys in TokenValidationParameters: '1'. 
+Number of keys in Configuration: '0'.
+Exceptions caught:
+ '[PII of type 'System.Text.StringBuilder' is hidden. For more details, see https://aka.ms/IdentityModel/PII.]'.
+token: '[PII of type 'Microsoft.IdentityModel.JsonWebTokens.JsonWebToken' is hidden. For more details, see https://aka.ms/IdentityModel/PII.]'. See https://aka.ms/IDX10503 for details.
+   at Microsoft.IdentityModel.JsonWebTokens.JsonWebTokenHandler.ValidateSignature(JsonWebToken jwtToken, TokenValidationParameters validationParameters, BaseConfiguration configuration)
+   at Microsoft.IdentityModel.JsonWebTokens.JsonWebTokenHandler.ValidateSignatureAndIssuerSecurityKey(JsonWebToken jsonWebToken, TokenValidationParameters validationParameters, BaseConfiguration configuration)
+   at Microsoft.IdentityModel.JsonWebTokens.JsonWebTokenHandler.ValidateJWSAsync(JsonWebToken jsonWebToken, TokenValidationParameters validationParameters, BaseConfiguration configuration)
+2026-03-13 14:37:52.528 +07:00 [INF] Bearer was not authenticated. Failure message: IDX10517: Signature validation failed. The token's kid is missing. Keys tried: 'Microsoft.IdentityModel.Tokens.SymmetricSecurityKey, KeyId: '', InternalId: 'RtElIW7E4Q6a_6IJqaxLFcOGYYKbKVz_rkxX_V9cNCw'. , KeyId: \r\n'.
+Number of keys in TokenValidationParameters: '1'. 
+Number of keys in Configuration: '0'.
+Exceptions caught:
+ '[PII of type 'System.Text.StringBuilder' is hidden. For more details, see https://aka.ms/IdentityModel/PII.]'.
+token: '[PII of type 'Microsoft.IdentityModel.JsonWebTokens.JsonWebToken' is hidden. For more details, see https://aka.ms/IdentityModel/PII.]'. See https://aka.ms/IDX10503 for details.
+2026-03-13 14:37:52.529 +07:00 [INF] Executing endpoint 'MyAPI.Controllers.AuthController.Login (MyAPI)'
+2026-03-13 14:37:52.530 +07:00 [INF] Route matched with {action = "Login", controller = "Auth"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Login(MyAPI.Models.LoginRequest) on controller MyAPI.Controllers.AuthController (MyAPI).
+2026-03-13 14:37:52.612 +07:00 [INF] Executed DbCommand (41ms) [Parameters=[@__username_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT u."Id", u."Password", u."Username"
+FROM "Users" AS u
+WHERE u."Username" = @__username_0
+LIMIT 1
+2026-03-13 14:37:52.881 +07:00 [INF] Executing UnauthorizedObjectResult, writing value of type '<>f__AnonymousType0`2[[System.Boolean, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2026-03-13 14:37:52.884 +07:00 [INF] Executed action MyAPI.Controllers.AuthController.Login (MyAPI) in 353.0019ms
+2026-03-13 14:37:52.886 +07:00 [INF] Executed endpoint 'MyAPI.Controllers.AuthController.Login (MyAPI)'
+2026-03-13 14:37:52.887 +07:00 [INF] Request finished HTTP/2 POST https://localhost:7046/api/Auth/login - 401 null application/json; charset=utf-8 429.9796ms
+2026-03-13 14:38:00.129 +07:00 [INF] Request starting HTTP/2 POST https://localhost:7046/api/Auth/login - application/json 49
+2026-03-13 14:38:00.136 +07:00 [INF] Failed to validate the token.
+Microsoft.IdentityModel.Tokens.SecurityTokenSignatureKeyNotFoundException: IDX10517: Signature validation failed. The token's kid is missing. Keys tried: 'Microsoft.IdentityModel.Tokens.SymmetricSecurityKey, KeyId: '', InternalId: 'RtElIW7E4Q6a_6IJqaxLFcOGYYKbKVz_rkxX_V9cNCw'. , KeyId: \r\n'.
+Number of keys in TokenValidationParameters: '1'. 
+Number of keys in Configuration: '0'.
+Exceptions caught:
+ '[PII of type 'System.Text.StringBuilder' is hidden. For more details, see https://aka.ms/IdentityModel/PII.]'.
+token: '[PII of type 'Microsoft.IdentityModel.JsonWebTokens.JsonWebToken' is hidden. For more details, see https://aka.ms/IdentityModel/PII.]'. See https://aka.ms/IDX10503 for details.
+   at Microsoft.IdentityModel.JsonWebTokens.JsonWebTokenHandler.ValidateSignature(JsonWebToken jwtToken, TokenValidationParameters validationParameters, BaseConfiguration configuration)
+   at Microsoft.IdentityModel.JsonWebTokens.JsonWebTokenHandler.ValidateSignatureAndIssuerSecurityKey(JsonWebToken jsonWebToken, TokenValidationParameters validationParameters, BaseConfiguration configuration)
+   at Microsoft.IdentityModel.JsonWebTokens.JsonWebTokenHandler.ValidateJWSAsync(JsonWebToken jsonWebToken, TokenValidationParameters validationParameters, BaseConfiguration configuration)
+2026-03-13 14:38:00.138 +07:00 [INF] Bearer was not authenticated. Failure message: IDX10517: Signature validation failed. The token's kid is missing. Keys tried: 'Microsoft.IdentityModel.Tokens.SymmetricSecurityKey, KeyId: '', InternalId: 'RtElIW7E4Q6a_6IJqaxLFcOGYYKbKVz_rkxX_V9cNCw'. , KeyId: \r\n'.
+Number of keys in TokenValidationParameters: '1'. 
+Number of keys in Configuration: '0'.
+Exceptions caught:
+ '[PII of type 'System.Text.StringBuilder' is hidden. For more details, see https://aka.ms/IdentityModel/PII.]'.
+token: '[PII of type 'Microsoft.IdentityModel.JsonWebTokens.JsonWebToken' is hidden. For more details, see https://aka.ms/IdentityModel/PII.]'. See https://aka.ms/IDX10503 for details.
+2026-03-13 14:38:00.139 +07:00 [INF] Executing endpoint 'MyAPI.Controllers.AuthController.Login (MyAPI)'
+2026-03-13 14:38:00.140 +07:00 [INF] Route matched with {action = "Login", controller = "Auth"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Login(MyAPI.Models.LoginRequest) on controller MyAPI.Controllers.AuthController (MyAPI).
+2026-03-13 14:38:00.182 +07:00 [INF] Executed DbCommand (38ms) [Parameters=[@__username_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT u."Id", u."Password", u."Username"
+FROM "Users" AS u
+WHERE u."Username" = @__username_0
+LIMIT 1
+2026-03-13 14:38:00.312 +07:00 [INF] Executing OkObjectResult, writing value of type '<>f__AnonymousType1`4[[System.String, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Int32, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Boolean, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2026-03-13 14:38:00.314 +07:00 [INF] Executed action MyAPI.Controllers.AuthController.Login (MyAPI) in 173.392ms
+2026-03-13 14:38:00.315 +07:00 [INF] Executed endpoint 'MyAPI.Controllers.AuthController.Login (MyAPI)'
+2026-03-13 14:38:00.317 +07:00 [INF] Request finished HTTP/2 POST https://localhost:7046/api/Auth/login - 200 null application/json; charset=utf-8 187.3217ms
+2026-03-13 16:33:05.019 +07:00 [INF] Executed DbCommand (74ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT "MigrationId", "ProductVersion"
+FROM "__EFMigrationsHistory"
+ORDER BY "MigrationId";
+2026-03-13 16:33:05.917 +07:00 [INF] Executed DbCommand (77ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE IF NOT EXISTS "__EFMigrationsHistory" (
+    "MigrationId" character varying(150) NOT NULL,
+    "ProductVersion" character varying(32) NOT NULL,
+    CONSTRAINT "PK___EFMigrationsHistory" PRIMARY KEY ("MigrationId")
+);
+2026-03-13 16:33:05.937 +07:00 [INF] Acquiring an exclusive lock for migration application. See https://aka.ms/efcore-docs-migrations-lock for more information if this takes too long.
+2026-03-13 16:33:05.984 +07:00 [INF] Executed DbCommand (43ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+LOCK TABLE "__EFMigrationsHistory" IN ACCESS EXCLUSIVE MODE
+2026-03-13 16:33:06.036 +07:00 [INF] Executed DbCommand (41ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT "MigrationId", "ProductVersion"
+FROM "__EFMigrationsHistory"
+ORDER BY "MigrationId";
+2026-03-13 16:33:06.050 +07:00 [INF] No migrations were applied. The database is already up to date.
+2026-03-13 16:33:06.397 +07:00 [INF] Executed DbCommand (44ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "Users" AS u)
+2026-03-13 16:33:06.458 +07:00 [INF] User profile is available. Using 'C:\Users\LAPTOP MSI\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2026-03-13 16:33:06.760 +07:00 [ERR] Hosting failed to start
+System.IO.IOException: Failed to bind to address http://0.0.0.0:8080: address already in use.
+ ---> Microsoft.AspNetCore.Connections.AddressInUseException: Only one usage of each socket address (protocol/network address/port) is normally permitted.
+ ---> System.Net.Sockets.SocketException (10048): Only one usage of each socket address (protocol/network address/port) is normally permitted.
+   at System.Net.Sockets.Socket.UpdateStatusAfterSocketErrorAndThrowException(SocketError error, Boolean disconnectOnFailure, String callerName)
+   at System.Net.Sockets.Socket.DoBind(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   at System.Net.Sockets.Socket.Bind(EndPoint localEP)
+   at Microsoft.AspNetCore.Server.Kestrel.Transport.Sockets.SocketTransportOptions.CreateDefaultBoundListenSocket(EndPoint endpoint)
+   at Microsoft.AspNetCore.Server.Kestrel.Transport.Sockets.SocketConnectionListener.Bind()
+   --- End of inner exception stack trace ---
+   at Microsoft.AspNetCore.Server.Kestrel.Transport.Sockets.SocketConnectionListener.Bind()
+   at Microsoft.AspNetCore.Server.Kestrel.Transport.Sockets.SocketTransportFactory.BindAsync(EndPoint endpoint, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Infrastructure.TransportManager.BindAsync(EndPoint endPoint, ConnectionDelegate connectionDelegate, EndpointConfig endpointConfig, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerImpl.<>c__DisplayClass28_0`1.<<StartAsync>g__OnBind|0>d.MoveNext()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.AddressBinder.BindEndpointAsync(ListenOptions endpoint, AddressBindContext context, CancellationToken cancellationToken)
+   --- End of inner exception stack trace ---
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.AddressBinder.BindEndpointAsync(ListenOptions endpoint, AddressBindContext context, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.ListenOptions.BindAsync(AddressBindContext context, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.AddressBinder.AddressesStrategy.BindAsync(AddressBindContext context, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerImpl.BindAsync(CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerImpl.StartAsync[TContext](IHttpApplication`1 application, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Hosting.GenericWebHostService.StartAsync(CancellationToken cancellationToken)
+   at Microsoft.Extensions.Hosting.Internal.Host.<StartAsync>b__14_1(IHostedService service, CancellationToken token)
+   at Microsoft.Extensions.Hosting.Internal.Host.ForeachService[T](IEnumerable`1 services, CancellationToken token, Boolean concurrent, Boolean abortOnFirstException, List`1 exceptions, Func`3 operation)
+2026-03-13 16:34:20.025 +07:00 [INF] Executed DbCommand (51ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT "MigrationId", "ProductVersion"
+FROM "__EFMigrationsHistory"
+ORDER BY "MigrationId";
+2026-03-13 16:34:20.586 +07:00 [INF] Executed DbCommand (52ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE IF NOT EXISTS "__EFMigrationsHistory" (
+    "MigrationId" character varying(150) NOT NULL,
+    "ProductVersion" character varying(32) NOT NULL,
+    CONSTRAINT "PK___EFMigrationsHistory" PRIMARY KEY ("MigrationId")
+);
+2026-03-13 16:34:20.605 +07:00 [INF] Acquiring an exclusive lock for migration application. See https://aka.ms/efcore-docs-migrations-lock for more information if this takes too long.
+2026-03-13 16:34:20.650 +07:00 [INF] Executed DbCommand (38ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+LOCK TABLE "__EFMigrationsHistory" IN ACCESS EXCLUSIVE MODE
+2026-03-13 16:34:20.702 +07:00 [INF] Executed DbCommand (38ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT "MigrationId", "ProductVersion"
+FROM "__EFMigrationsHistory"
+ORDER BY "MigrationId";
+2026-03-13 16:34:20.724 +07:00 [INF] No migrations were applied. The database is already up to date.
+2026-03-13 16:34:20.996 +07:00 [INF] Executed DbCommand (47ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "Users" AS u)
+2026-03-13 16:34:21.048 +07:00 [INF] User profile is available. Using 'C:\Users\LAPTOP MSI\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2026-03-13 16:34:21.358 +07:00 [INF] Now listening on: https://localhost:7046
+2026-03-13 16:34:21.363 +07:00 [INF] Now listening on: http://localhost:5135
+2026-03-13 16:34:21.464 +07:00 [INF] Application started. Press Ctrl+C to shut down.
+2026-03-13 16:34:21.468 +07:00 [INF] Hosting environment: Development
+2026-03-13 16:34:21.472 +07:00 [INF] Content root path: E:\Code\MyAPI\MyAPI
+2026-03-13 16:34:51.093 +07:00 [INF] Request starting HTTP/2 GET https://localhost:7046/swagger/index.html - null null
+2026-03-13 16:34:51.370 +07:00 [INF] Request finished HTTP/2 GET https://localhost:7046/swagger/index.html - 200 null text/html;charset=utf-8 294.6163ms
+2026-03-13 16:34:51.378 +07:00 [INF] Request starting HTTP/2 GET https://localhost:7046/_vs/browserLink - null null
+2026-03-13 16:34:51.378 +07:00 [INF] Request starting HTTP/2 GET https://localhost:7046/swagger/index.js - null null
+2026-03-13 16:34:51.378 +07:00 [INF] Request starting HTTP/2 GET https://localhost:7046/_framework/aspnetcore-browser-refresh.js - null null
+2026-03-13 16:34:51.425 +07:00 [INF] Request finished HTTP/2 GET https://localhost:7046/swagger/index.js - 200 null application/javascript;charset=utf-8 47.7147ms
+2026-03-13 16:34:51.468 +07:00 [INF] Request finished HTTP/2 GET https://localhost:7046/_framework/aspnetcore-browser-refresh.js - 200 14915 application/javascript; charset=utf-8 91.0304ms
+2026-03-13 16:34:51.491 +07:00 [INF] Request finished HTTP/2 GET https://localhost:7046/_vs/browserLink - 200 null text/javascript; charset=UTF-8 113.0394ms
+2026-03-13 16:34:51.676 +07:00 [INF] Request starting HTTP/2 GET https://localhost:7046/swagger/v1/swagger.json - null null
+2026-03-13 16:34:51.697 +07:00 [INF] Request finished HTTP/2 GET https://localhost:7046/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 21.3189ms

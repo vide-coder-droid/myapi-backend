@@ -2,7 +2,6 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.RateLimiting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
-using Microsoft.OpenApi;
 using Microsoft.OpenApi.Models;
 using MyAPI.Data;
 using MyAPI.Extensions;
@@ -13,6 +12,16 @@ using System.Threading.RateLimiting;
 var builder = WebApplication.CreateBuilder(args);
 
 
+// ================= PORT (Render / Docker) =================
+
+var port = Environment.GetEnvironmentVariable("PORT");
+
+if (!string.IsNullOrEmpty(port))
+{
+    builder.WebHost.UseUrls($"http://0.0.0.0:{port}");
+}
+
+
 // ================= LOGGING =================
 
 Log.Logger = new LoggerConfiguration()
@@ -21,14 +30,6 @@ Log.Logger = new LoggerConfiguration()
     .CreateLogger();
 
 builder.Host.UseSerilog();
-
-
-// ================= RENDER PORT =================
-
-if (Environment.GetEnvironmentVariable("RENDER") != null)
-{
-    builder.WebHost.UseUrls("http://0.0.0.0:8080");
-}
 
 
 // ================= SERVICES =================
@@ -70,8 +71,7 @@ builder.Services.AddAuthentication(options =>
         ValidateIssuerSigningKey = true,
 
         IssuerSigningKey = new SymmetricSecurityKey(
-            Encoding.UTF8.GetBytes(jwtKey)
-        )
+            Encoding.UTF8.GetBytes(jwtKey))
     };
 });
 
@@ -91,7 +91,6 @@ builder.Services.AddSwaggerGen(c =>
         Description = "MyAPI Backend (.NET 9 + JWT + PostgreSQL)"
     });
 
-    // JWT button
     c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
     {
         Name = "Authorization",
@@ -99,7 +98,7 @@ builder.Services.AddSwaggerGen(c =>
         Scheme = "bearer",
         BearerFormat = "JWT",
         In = ParameterLocation.Header,
-        Description = "Enter token: Bearer {your JWT token}"
+        Description = "Bearer {token}"
     });
 
     c.AddSecurityRequirement(new OpenApiSecurityRequirement
@@ -107,9 +106,9 @@ builder.Services.AddSwaggerGen(c =>
         {
             new OpenApiSecurityScheme
             {
-                Reference = new OpenApiReference
+                Reference = new Microsoft.OpenApi.Models.OpenApiReference
                 {
-                    Type = ReferenceType.SecurityScheme,
+                    Type = Microsoft.OpenApi.Models.ReferenceType.SecurityScheme,
                     Id = "Bearer"
                 }
             },
@@ -144,22 +143,31 @@ var app = builder.Build();
 
 // ================= MIDDLEWARE =================
 
-app.UseSwagger();
-app.UseSwaggerUI();
+if (app.Environment.IsDevelopment())
+{
+    app.UseSwagger();
+    app.UseSwaggerUI();
+}
 
-app.UseHttpsRedirection();
+if (!app.Environment.IsDevelopment())
+{
+    app.UseHttpsRedirection();
+}
 
 app.UseRateLimiter();
 
 app.UseAuthentication();
 app.UseAuthorization();
 
+
+// ================= ROUTES =================
+
 app.MapControllers();
 
-
-// ================= HEALTH =================
-
 app.MapHealthChecks("/health");
+
+// Render health check
+app.MapGet("/", () => Results.Ok("MyAPI running"));
 
 
 // ================= AUTO MIGRATION =================
@@ -168,9 +176,15 @@ using (var scope = app.Services.CreateScope())
 {
     var db = scope.ServiceProvider.GetRequiredService<AppDbContext>();
 
-    db.Database.Migrate();
-
-    DbSeeder.Seed(db);
+    try
+    {
+        db.Database.Migrate();
+        DbSeeder.Seed(db);
+    }
+    catch (Exception ex)
+    {
+        Log.Error(ex, "Database migration failed");
+    }
 }
 
 
