@@ -1,20 +1,12 @@
-# ---------- BUILD ----------
+# Build stage
 FROM mcr.microsoft.com/dotnet/sdk:9.0 AS build
 WORKDIR /src
-
-COPY MyAPI.sln .
-COPY MyAPI/*.csproj ./MyAPI/
-RUN dotnet restore
-
-COPY MyAPI/. ./MyAPI/
-
-WORKDIR /src/MyAPI
+COPY . .
 RUN dotnet publish -c Release -o /app/publish
 
-# ---------- RUNTIME ----------
+# Runtime stage
 FROM mcr.microsoft.com/dotnet/aspnet:9.0
 WORKDIR /app
-
 COPY --from=build /app/publish .
 
 EXPOSE 8080
