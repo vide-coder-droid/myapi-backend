@@ -28,9 +28,7 @@ builder.Services.AddApplicationServices();
 // PostgreSQL
 builder.Services.AddDbContext<AppDbContext>(options =>
 {
-    var connection =
-        Environment.GetEnvironmentVariable("DATABASE_URL")
-        ?? builder.Configuration.GetConnectionString("DefaultConnection");
+    var connection = builder.Configuration.GetConnectionString("DefaultConnection");
 
     options.UseNpgsql(connection);
 });
