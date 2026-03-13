@@ -1,4 +1,6 @@
+using Microsoft.EntityFrameworkCore;
 using MyAPI.Extensions;
+using MyAPI.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -8,6 +10,13 @@ builder.Services.AddControllers();
 
 // gọi services từ Extensions
 builder.Services.AddApplicationServices();
+
+// 🔹 Add PostgreSQL DB
+builder.Services.AddDbContext<AppDbContext>(options =>
+{
+    var connection = Environment.GetEnvironmentVariable("DATABASE_URL");
+    options.UseNpgsql(connection);
+});
 
 // Swagger
 builder.Services.AddEndpointsApiExplorer();
