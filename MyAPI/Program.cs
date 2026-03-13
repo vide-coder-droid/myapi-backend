@@ -4,6 +4,12 @@ using MyAPI.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 
+// CHỈ chạy port 8080 khi deploy
+if (Environment.GetEnvironmentVariable("RENDER") != null)
+{
+    builder.WebHost.UseUrls("http://0.0.0.0:8080");
+}
+
 // ================= SERVICES =================
 
 builder.Services.AddControllers();
@@ -15,6 +21,10 @@ builder.Services.AddApplicationServices();
 builder.Services.AddDbContext<AppDbContext>(options =>
 {
     var connection = Environment.GetEnvironmentVariable("DATABASE_URL");
+
+    if (string.IsNullOrEmpty(connection))
+        throw new Exception("DATABASE_URL not found");
+
     options.UseNpgsql(connection);
 });
 
