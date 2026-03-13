@@ -41,10 +41,15 @@ builder.Services.AddApplicationServices();
 // ================= DATABASE =================
 
 builder.Services.AddDbContext<AppDbContext>(options =>
-{
-    var connection = builder.Configuration.GetConnectionString("DefaultConnection");
-    options.UseNpgsql(connection);
-});
+    options.UseNpgsql(
+        builder.Configuration.GetConnectionString("DefaultConnection"),
+        o =>
+        {
+            o.EnableRetryOnFailure(
+                maxRetryCount: 5,
+                maxRetryDelay: TimeSpan.FromSeconds(10),
+                errorCodesToAdd: null);
+        }));
 
 
 // ================= JWT AUTH =================
