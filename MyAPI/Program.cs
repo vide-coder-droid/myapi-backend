@@ -167,21 +167,14 @@ app.MapGet("/", () => Results.Ok("MyAPI running"));
 
 // ================= AUTO MIGRATION =================
 
-using (var scope = app.Services.CreateScope())
+if (app.Environment.IsDevelopment())
 {
+    using var scope = app.Services.CreateScope();
     var db = scope.ServiceProvider.GetRequiredService<AppDbContext>();
 
-    try
-    {
-        db.Database.Migrate();
-        DbSeeder.Seed(db);
-    }
-    catch (Exception ex)
-    {
-        Log.Error(ex, "Database migration failed");
-    }
+    db.Database.Migrate();
+    DbSeeder.Seed(db);
 }
-
 
 // ================= RUN =================
 

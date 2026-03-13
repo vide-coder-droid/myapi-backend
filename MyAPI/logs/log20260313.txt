@@ -955,3 +955,65 @@ LIMIT 1
 2026-03-13 17:04:31.904 +07:00 [INF] Executed action MyAPI.Controllers.AuthController.Login (MyAPI) in 374.1308ms
 2026-03-13 17:04:31.906 +07:00 [INF] Executed endpoint 'MyAPI.Controllers.AuthController.Login (MyAPI)'
 2026-03-13 17:04:31.908 +07:00 [INF] Request finished HTTP/2 POST https://localhost:7046/api/Auth/login - 200 null application/json; charset=utf-8 383.3478ms
+2026-03-13 18:29:04.171 +07:00 [INF] Executed DbCommand (53ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT "MigrationId", "ProductVersion"
+FROM "__EFMigrationsHistory"
+ORDER BY "MigrationId";
+2026-03-13 18:29:04.957 +07:00 [INF] Executed DbCommand (43ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE IF NOT EXISTS "__EFMigrationsHistory" (
+    "MigrationId" character varying(150) NOT NULL,
+    "ProductVersion" character varying(32) NOT NULL,
+    CONSTRAINT "PK___EFMigrationsHistory" PRIMARY KEY ("MigrationId")
+);
+2026-03-13 18:29:04.967 +07:00 [INF] Acquiring an exclusive lock for migration application. See https://aka.ms/efcore-docs-migrations-lock for more information if this takes too long.
+2026-03-13 18:29:05.006 +07:00 [INF] Executed DbCommand (37ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+LOCK TABLE "__EFMigrationsHistory" IN ACCESS EXCLUSIVE MODE
+2026-03-13 18:29:05.046 +07:00 [INF] Executed DbCommand (37ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT "MigrationId", "ProductVersion"
+FROM "__EFMigrationsHistory"
+ORDER BY "MigrationId";
+2026-03-13 18:29:05.054 +07:00 [INF] No migrations were applied. The database is already up to date.
+2026-03-13 18:29:05.303 +07:00 [INF] Executed DbCommand (42ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "Users" AS u)
+2026-03-13 18:29:05.341 +07:00 [INF] User profile is available. Using 'C:\Users\LAPTOP MSI\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2026-03-13 18:29:05.574 +07:00 [INF] Now listening on: https://localhost:7046
+2026-03-13 18:29:05.574 +07:00 [INF] Now listening on: http://localhost:5135
+2026-03-13 18:29:05.648 +07:00 [INF] Application started. Press Ctrl+C to shut down.
+2026-03-13 18:29:05.650 +07:00 [INF] Hosting environment: Development
+2026-03-13 18:29:05.650 +07:00 [INF] Content root path: E:\Code\MyAPI\MyAPI
+2026-03-13 18:29:08.442 +07:00 [INF] Request starting HTTP/2 GET https://localhost:7046/swagger/index.html - null null
+2026-03-13 18:29:08.622 +07:00 [INF] Request finished HTTP/2 GET https://localhost:7046/swagger/index.html - 200 null text/html;charset=utf-8 190.8654ms
+2026-03-13 18:29:08.628 +07:00 [INF] Request starting HTTP/2 GET https://localhost:7046/_vs/browserLink - null null
+2026-03-13 18:29:08.628 +07:00 [INF] Request starting HTTP/2 GET https://localhost:7046/swagger/index.js - null null
+2026-03-13 18:29:08.628 +07:00 [INF] Request starting HTTP/2 GET https://localhost:7046/_framework/aspnetcore-browser-refresh.js - null null
+2026-03-13 18:29:08.639 +07:00 [INF] Request finished HTTP/2 GET https://localhost:7046/swagger/index.js - 200 null application/javascript;charset=utf-8 11.4085ms
+2026-03-13 18:29:08.657 +07:00 [INF] Request finished HTTP/2 GET https://localhost:7046/_framework/aspnetcore-browser-refresh.js - 200 14915 application/javascript; charset=utf-8 29.5662ms
+2026-03-13 18:29:08.667 +07:00 [INF] Request finished HTTP/2 GET https://localhost:7046/_vs/browserLink - 200 null text/javascript; charset=UTF-8 39.2596ms
+2026-03-13 18:29:08.810 +07:00 [INF] Request starting HTTP/2 GET https://localhost:7046/swagger/v1/swagger.json - null null
+2026-03-13 18:29:08.823 +07:00 [INF] Request finished HTTP/2 GET https://localhost:7046/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 13.7032ms
+2026-03-13 18:29:12.991 +07:00 [INF] Request starting HTTP/2 POST https://localhost:7046/api/Auth/login - application/json 50
+2026-03-13 18:29:13.055 +07:00 [INF] Executing endpoint 'MyAPI.Controllers.AuthController.Login (MyAPI)'
+2026-03-13 18:29:13.071 +07:00 [INF] Route matched with {action = "Login", controller = "Auth"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Login(MyAPI.Models.LoginRequest) on controller MyAPI.Controllers.AuthController (MyAPI).
+2026-03-13 18:29:13.239 +07:00 [INF] Executed DbCommand (45ms) [Parameters=[@__username_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT u."Id", u."Password", u."Username"
+FROM "Users" AS u
+WHERE u."Username" = @__username_0
+LIMIT 1
+2026-03-13 18:29:13.248 +07:00 [INF] Executing UnauthorizedObjectResult, writing value of type '<>f__AnonymousType0`2[[System.Boolean, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2026-03-13 18:29:13.255 +07:00 [INF] Executed action MyAPI.Controllers.AuthController.Login (MyAPI) in 179.0356ms
+2026-03-13 18:29:13.257 +07:00 [INF] Executed endpoint 'MyAPI.Controllers.AuthController.Login (MyAPI)'
+2026-03-13 18:29:13.262 +07:00 [INF] Request finished HTTP/2 POST https://localhost:7046/api/Auth/login - 401 null application/json; charset=utf-8 271.392ms
+2026-03-13 18:29:27.790 +07:00 [INF] Request starting HTTP/2 POST https://localhost:7046/api/Auth/login - application/json 49
+2026-03-13 18:29:27.795 +07:00 [INF] Executing endpoint 'MyAPI.Controllers.AuthController.Login (MyAPI)'
+2026-03-13 18:29:27.796 +07:00 [INF] Route matched with {action = "Login", controller = "Auth"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Login(MyAPI.Models.LoginRequest) on controller MyAPI.Controllers.AuthController (MyAPI).
+2026-03-13 18:29:27.878 +07:00 [INF] Executed DbCommand (37ms) [Parameters=[@__username_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT u."Id", u."Password", u."Username"
+FROM "Users" AS u
+WHERE u."Username" = @__username_0
+LIMIT 1
+2026-03-13 18:29:28.229 +07:00 [INF] Executing OkObjectResult, writing value of type '<>f__AnonymousType1`4[[System.String, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Int32, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Boolean, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2026-03-13 18:29:28.232 +07:00 [INF] Executed action MyAPI.Controllers.AuthController.Login (MyAPI) in 434.8123ms
+2026-03-13 18:29:28.234 +07:00 [INF] Executed endpoint 'MyAPI.Controllers.AuthController.Login (MyAPI)'
+2026-03-13 18:29:28.235 +07:00 [INF] Request finished HTTP/2 POST https://localhost:7046/api/Auth/login - 200 null application/json; charset=utf-8 444.5012ms
