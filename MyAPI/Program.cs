@@ -6,7 +6,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
 
-// gọi services từ file Extensions
+// gọi services từ Extensions
 builder.Services.AddApplicationServices();
 
 // Swagger
@@ -17,11 +17,9 @@ var app = builder.Build();
 
 // ================= MIDDLEWARE =================
 
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI();
-}
+// BẬT SWAGGER LUÔN
+app.UseSwagger();
+app.UseSwaggerUI();
 
 app.UseHttpsRedirection();
 
