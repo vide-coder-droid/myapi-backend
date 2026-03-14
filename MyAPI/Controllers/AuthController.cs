@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using MyAPI.Models;
 using MyAPI.Repositories;
 using MyAPI.Services;
@@ -17,7 +18,7 @@ public class AuthController : ControllerBase
         _repo = repo;
         _jwt = jwt;
     }
-
+    [AllowAnonymous]
     [HttpPost("login")]
     public IActionResult Login([FromBody] LoginRequest req)
     {
