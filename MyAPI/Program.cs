@@ -24,7 +24,10 @@ builder.Services.AddHealthChecks();
 
 var app = builder.Build();
 
-// Middlerare
+// ===== APPLY MIGRATION FIRST =====
+app.ApplyMigration();
+
+// Middleware
 app.UseSwaggerDocs();
 
 app.UseCors("AllowAll");
@@ -45,8 +48,5 @@ app.MapControllers().RequireRateLimiting("api");
 app.MapHealthChecks("/health");
 
 app.MapGet("/", () => Results.Ok("MyAPI running"));
-
-// Migration
-app.ApplyMigration();
 
 app.Run();

@@ -33,12 +33,17 @@ namespace MyAPI.Services
                 SecurityAlgorithms.HmacSha256
             );
 
-            var claims = new[]
+            var claims = new List<Claim>
+{
+            new Claim(JwtRegisteredClaimNames.Sub, user.Username),
+            new Claim(ClaimTypes.Name, user.Username),
+            new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
+};
+
+            foreach (var userRole in user.UserRoles)
             {
-                new Claim(JwtRegisteredClaimNames.Sub, user.Username),
-                new Claim(ClaimTypes.Name, user.Username),
-                new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
-            };
+                claims.Add(new Claim(ClaimTypes.Role, userRole.Role.Name));
+            }
 
             var expiration = DateTime.UtcNow.AddHours(2);
 
@@ -46,7 +51,7 @@ namespace MyAPI.Services
                 issuer: _config["Jwt:Issuer"],
                 audience: _config["Jwt:Audience"],
                 claims: claims,
-                expires: expiration,
+                expires: DateTime.UtcNow.AddHours(2),
                 signingCredentials: creds
             );
 

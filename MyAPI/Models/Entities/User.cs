@@ -10,6 +10,14 @@ namespace MyAPI.Models.Entities
         public string Username { get; set; }
 
         [Required]
-        public string Password { get; set; }
+        public string PasswordHash { get; set; }
+
+        public string? Email { get; set; }
+
+        public bool IsActive { get; set; }
+
+        public DateTime CreatedAt { get; set; }
+
+        public ICollection<UserRole> UserRoles { get; set; } = new List<UserRole>();
     }
 }
