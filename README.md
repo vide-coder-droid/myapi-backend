@@ -89,7 +89,7 @@ Demo REST API sử dụng **ASP.NET Core + JWT Authentication** để xác thự
 
 ## Yêu cầu
 
-- .NET SDK 8+
+- .NET SDK 9+
 - PostgreSQL
 - Docker (optional)
 
