@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using MyAPI.Models;
+using MyAPI.Models.Requests;
 using MyAPI.Repositories;
 using MyAPI.Services;
 

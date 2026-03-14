@@ -2,7 +2,7 @@
 using System.Security.Claims;
 using System.Text;
 using Microsoft.IdentityModel.Tokens;
-using MyAPI.Models;
+using MyAPI.Models.Entities;
 
 namespace MyAPI.Services
 {

@@ -1,4 +1,4 @@
-﻿namespace MyAPI.Models
+﻿namespace MyAPI.Models.Requests
 {
     public class LoginRequest
     {

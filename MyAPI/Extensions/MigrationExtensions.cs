@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using MyAPI.Data;
+using MyAPI.Data.Seed;
 
 namespace MyAPI.Extensions;
 

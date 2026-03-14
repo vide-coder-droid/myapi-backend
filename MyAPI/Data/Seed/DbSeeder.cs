@@ -1,7 +1,7 @@
-﻿using MyAPI.Models;
-using BCrypt.Net;
+﻿using BCrypt.Net;
+using MyAPI.Models.Entities;
 
-namespace MyAPI.Data
+namespace MyAPI.Data.Seed
 {
     public static class DbSeeder
     {

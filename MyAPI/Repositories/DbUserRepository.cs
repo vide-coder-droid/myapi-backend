@@ -1,6 +1,6 @@
-﻿using MyAPI.Models;
-using MyAPI.Data;
+﻿using MyAPI.Data;
 using BCrypt.Net;
+using MyAPI.Models.Entities;
 
 namespace MyAPI.Repositories
 {

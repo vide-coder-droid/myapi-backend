@@ -1,4 +1,4 @@
-﻿using MyAPI.Models;
+﻿using MyAPI.Models.Entities;
 
 namespace MyAPI.Repositories
 {
