@@ -1,5 +1,6 @@
 using MyAPI.Data;
 using MyAPI.Extensions;
+using Scalar.AspNetCore;
 using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -29,6 +30,11 @@ app.ApplyMigration();
 
 // Middleware
 app.UseSwaggerDocs();
+
+app.MapScalarApiReference(options =>
+{
+    options.WithOpenApiRoutePattern("/swagger/{documentName}/swagger.json");
+});
 
 app.UseCors("AllowAll");
 
