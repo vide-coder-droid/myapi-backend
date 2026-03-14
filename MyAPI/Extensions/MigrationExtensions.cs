@@ -1,6 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using MyAPI.Data;
-using MyAPI.Data.Seed;
 
 namespace MyAPI.Extensions;
 
@@ -13,6 +12,5 @@ public static class MigrationExtensions
         var db = scope.ServiceProvider.GetRequiredService<AppDbContext>();
 
         db.Database.Migrate();
-        DbSeeder.Seed(db);
     }
 }
