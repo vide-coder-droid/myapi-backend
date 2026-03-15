@@ -2,6 +2,7 @@ using MyAPI.Data;
 using MyAPI.Extensions;
 using Scalar.AspNetCore;
 using Serilog;
+using MyAPI.Hubs;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -22,6 +23,7 @@ builder.Services.AddSwaggerDocs();
 builder.Services.AddRateLimiterConfig();
 builder.Services.AddCorsPolicy();
 builder.Services.AddHealthChecks();
+builder.Services.AddSignalRConfig();
 
 var app = builder.Build();
 
@@ -29,12 +31,15 @@ var app = builder.Build();
 app.ApplyMigration();
 
 // Middleware
-app.UseSwaggerDocs();
-
-app.MapScalarApiReference(options =>
+if (app.Environment.IsDevelopment())
 {
-    options.WithOpenApiRoutePattern("/swagger/{documentName}/swagger.json");
-});
+    app.UseSwaggerDocs();
+
+    app.MapScalarApiReference(options =>
+    {
+        options.WithOpenApiRoutePattern("/swagger/{documentName}/swagger.json");
+    });
+}
 
 app.UseCors("AllowAll");
 
@@ -50,7 +55,7 @@ app.UseAuthorization();
 
 // Routes
 app.MapControllers().RequireRateLimiting("api");
-
+app.MapHub<ChatHub>("/chatHub");
 app.MapHealthChecks("/health");
 
 app.MapGet("/", () => Results.Ok("MyAPI running"));
