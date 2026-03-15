@@ -1,37 +1,42 @@
-# MyAPI -- ASP.NET Core JWT + Realtime Chat API
+# 🔐 JWT Authentication Demo – ASP.NET Core API
 
-MyAPI is a demo REST API built with ASP.NET Core that demonstrates:
+Demo xây dựng **REST API bằng ASP.NET Core**, sử dụng **JWT (JSON Web Token)** để xác thực người dùng và bảo vệ endpoint.
 
--   JWT authentication
--   Protected endpoints using `[Authorize]`
--   Realtime messaging with SignalR
--   PostgreSQL database using Entity Framework Core
--   Repository pattern
--   Structured logging
--   Rate limiting
--   Docker support
+Project minh họa cách triển khai **JWT Authentication trong .NET API** với:
 
-The goal of this project is to show a clean and modern ASP.NET Core Web
-API structure suitable for learning and small backend services.
+- Login tạo JWT token
+- Bảo vệ endpoint bằng `[Authorize]`
+- Repository pattern
+- Entity Framework Core + PostgreSQL
+- Rate limiting và logging
 
-------------------------------------------------------------------------
+---
 
-## Tech Stack
+## 🎯 Mục tiêu dự án
 
--   .NET 9
--   ASP.NET Core Web API
--   Entity Framework Core
--   PostgreSQL
--   JWT Authentication
--   SignalR
--   Serilog
--   Swagger / OpenAPI
--   Docker
+- Hiểu cách **JWT hoạt động trong ASP.NET Core API**
+- Xây dựng API có **xác thực JWT**
+- Triển khai **Repository Pattern**
+- Sử dụng **Entity Framework Core + PostgreSQL**
+- Tổ chức project theo **structure clean cho Web API**
 
-------------------------------------------------------------------------
+---
 
-## Project Structure
+## 🧱 Công nghệ sử dụng
 
+- .NET 9 / ASP.NET Core Web API
+- Entity Framework Core
+- PostgreSQL
+- JWT Authentication
+- Serilog (Logging)
+- Swagger / OpenAPI
+- Docker
+
+---
+
+## 📁 Project Structure
+
+```
 MyAPI/
 │
 ├── Controllers/
@@ -77,147 +82,160 @@ MyAPI/
 ├── Program.cs
 ├── appsettings.json
 └── MyAPI.csproj
-
-------------------------------------------------------------------------
-
-## Realtime Chat
-
-Realtime messaging is implemented using SignalR.
-
-Hub endpoint:
-
-/chatHub
-
-Example JavaScript client:
-
-```{=html}
-<script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/7.0.5/signalr.min.js"></script>
-```
-```{=html}
-<script>
-const connection = new signalR.HubConnectionBuilder()
-    .withUrl("http://localhost:5000/chatHub")
-    .build();
-
-connection.on("ReceiveMessage", (user, message) => {
-    console.log(user + ": " + message);
-});
-
-connection.start();
-
-function send() {
-    connection.invoke("SendMessage", "Tom", "Hello");
-}
-</script>
 ```
 
-------------------------------------------------------------------------
+---
 
-## Requirements
+# 📌 MyAPI – ASP.NET Core JWT Demo
 
--   .NET SDK 9+
--   PostgreSQL
--   Docker (optional)
+Demo REST API sử dụng **ASP.NET Core + JWT Authentication** để xác thực người dùng và bảo vệ endpoint.
 
-------------------------------------------------------------------------
+---
 
-## Installation
+## Yêu cầu
 
-Clone the repository
+- .NET SDK 9+
+- PostgreSQL
+- Docker (optional)
 
-git clone https://github.com/vide-coder-droid/myapi-backend.git cd
-myapi-backend
+---
 
-Restore dependencies
+## Cài đặt
 
+Clone project:
+
+```
+git clone https://github.com/vide-coder-droid/myapi-backend.git
+cd myapi-backend
+```
+
+Restore packages:
+
+```
 dotnet restore
+```
 
-------------------------------------------------------------------------
+---
 
-## Environment Variables
+## Cấu hình Environment Variables
 
-JWT secret should be configured using an environment variable.
+JWT Secret nên được cấu hình bằng **environment variable**.
 
-Windows (PowerShell)
+### Windows (PowerShell)
 
+```
 setx JWT_SECRET_KEY "your-secret-key"
+```
 
-Linux / macOS
+### Linux / macOS
 
+```
 export JWT_SECRET_KEY="your-secret-key"
+```
 
-------------------------------------------------------------------------
+---
 
-## Database Configuration
+## Cấu hình Database
 
-Update `appsettings.json`:
+Sửa `appsettings.json`:
 
-"ConnectionStrings": { "DefaultConnection":
-"Host=localhost;Port=5432;Database=myapi;Username=postgres;Password=123456"
+```
+"ConnectionStrings": {
+  "DefaultConnection": "Host=localhost;Port=5432;Database=myapi;Username=postgres;Password=123456"
 }
+```
 
-Run migrations:
+---
 
+## Chạy Migration
+
+```
 dotnet ef database update
+```
 
-------------------------------------------------------------------------
+---
 
-## Run the Application
+## Chạy ứng dụng
 
+```
 dotnet run
+```
 
-Swagger UI (development only):
+Swagger UI:
 
+```
 http://localhost:5000/swagger
+```
 
-------------------------------------------------------------------------
+---
 
-## API Endpoints
+## API chính
 
-Login
+### Login
 
+```
 POST /api/auth/login
+```
 
-Request body
+Body:
 
-{ "username": "admin", "password": "123456" }
+```
+{
+  "username": "admin",
+  "password": "123456"
+}
+```
 
-Response
+Response:
 
-{ "token": "JWT_TOKEN" }
+```
+{
+  "token": "JWT_TOKEN"
+}
+```
 
-Protected endpoint
+---
 
+### Protected Endpoint
+
+```
 GET /api/auth/me
+```
 
-Header
+Header:
 
-Authorization: Bearer `<JWT_TOKEN>`{=html}
+```
+Authorization: Bearer <JWT_TOKEN>
+```
 
-------------------------------------------------------------------------
+---
 
 ## Logging
 
-Logs are written using Serilog to:
+Logs được ghi bằng **Serilog** vào thư mục:
 
+```
 logs/
+```
 
-------------------------------------------------------------------------
+---
 
 ## Docker
 
-Build image
+Build image:
 
+```
 docker build -t myapi .
+```
 
-Run container
+Run container:
 
+```
 docker run -p 5000:5000 myapi
+```
 
-------------------------------------------------------------------------
+---
 
-## Notes
+## Lưu ý
 
-This project is intended for learning and demonstration purposes.
-Additional security, validation, and architecture improvements should be
-applied before using it in production.
+Project này được xây dựng **cho mục đích học tập và demo**, không dùng trực tiếp cho production.
