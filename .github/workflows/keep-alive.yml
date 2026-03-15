@@ -8,7 +8,6 @@ on:
 jobs:
   ping:
     runs-on: ubuntu-latest
-
     steps:
-      - name: Ping API
-        run: curl -s https://yangeng.duckdns.org > /dev/null
+      - name: Ping Render
+        run: curl -s https://yangeng.duckdns.org/health > /dev/null
