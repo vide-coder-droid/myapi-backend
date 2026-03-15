@@ -21,11 +21,19 @@ namespace MyAPI.Data
 
         public DbSet<RolePermission> RolePermissions { get; set; }
 
+        public DbSet<Conversation> Conversations => Set<Conversation>();
+
+        public DbSet<ConversationMember> ConversationMembers => Set<ConversationMember>();
+
+        public DbSet<Message> Messages => Set<Message>();
+
+        public DbSet<MessageRead> MessageReads => Set<MessageRead>();
+
+        public DbSet<Attachment> Attachments => Set<Attachment>();
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            base.OnModelCreating(modelBuilder);
-
-            // composite key UserRoles
+            // UserRoles
             modelBuilder.Entity<UserRole>()
                 .HasKey(x => new { x.UserId, x.RoleId });
 
@@ -39,7 +47,7 @@ namespace MyAPI.Data
                 .WithMany(x => x.UserRoles)
                 .HasForeignKey(x => x.RoleId);
 
-            // composite key RolePermissions
+            // RolePermissions
             modelBuilder.Entity<RolePermission>()
                 .HasKey(x => new { x.RoleId, x.PermissionId });
 
@@ -52,6 +60,24 @@ namespace MyAPI.Data
                 .HasOne(x => x.Permission)
                 .WithMany(x => x.RolePermissions)
                 .HasForeignKey(x => x.PermissionId);
+
+            // Chat entities
+            modelBuilder.Entity<Message>()
+                .HasIndex(x => new { x.ConversationId, x.CreatedAt });
+
+            modelBuilder.Entity<ConversationMember>()
+                .HasIndex(x => x.UserId);
+
+            modelBuilder.Entity<MessageRead>()
+                .HasIndex(x => x.MessageId);
+
+            modelBuilder.Entity<Attachment>()
+                .HasIndex(x => x.MessageId);
+
+            modelBuilder.Entity<Conversation>()
+                .HasIndex(x => x.CreatedAt);
+
+            base.OnModelCreating(modelBuilder);
         }
     }
 }
