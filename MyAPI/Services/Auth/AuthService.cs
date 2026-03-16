@@ -50,7 +50,7 @@ namespace MyAPI.Services.Auth
                     avatar = user.Profile?.AvatarUrl,
                     roles = user.UserRoles.Select(r => r.Role.Name)
                 }
-            });
+            }, "Login successful");
         }
 
         public async Task<ApiResponse<object>> CreateUserAsync(CreateUserRequest req, ClaimsPrincipal currentUser)
