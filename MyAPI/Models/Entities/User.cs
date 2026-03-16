@@ -18,6 +18,8 @@ namespace MyAPI.Models.Entities
 
         public DateTime CreatedAt { get; set; }
 
+        public UserProfile? Profile { get; set; }
+
         public ICollection<UserRole> UserRoles { get; set; } = new List<UserRole>();
     }
 }

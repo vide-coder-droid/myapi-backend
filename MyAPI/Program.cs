@@ -3,6 +3,7 @@ using MyAPI.Extensions;
 using Scalar.AspNetCore;
 using Serilog;
 using MyAPI.Hubs;
+using Microsoft.AspNetCore.Http.Features;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -24,6 +25,11 @@ builder.Services.AddRateLimiterConfig();
 builder.Services.AddCorsPolicy();
 builder.Services.AddHealthChecks();
 builder.Services.AddSignalRConfig();
+
+builder.Services.Configure<FormOptions>(options =>
+{
+    options.MultipartBodyLengthLimit = 50 * 1024 * 1024;
+});
 
 var app = builder.Build();
 

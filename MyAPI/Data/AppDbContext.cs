@@ -21,6 +21,8 @@ namespace MyAPI.Data
 
         public DbSet<RolePermission> RolePermissions { get; set; }
 
+        public DbSet<UserProfile> UserProfiles { get; set; }
+
         public DbSet<Conversation> Conversations => Set<Conversation>();
 
         public DbSet<ConversationMember> ConversationMembers => Set<ConversationMember>();
@@ -60,6 +62,13 @@ namespace MyAPI.Data
                 .HasOne(x => x.Permission)
                 .WithMany(x => x.RolePermissions)
                 .HasForeignKey(x => x.PermissionId);
+
+            // UserProfile
+            modelBuilder.Entity<UserProfile>()
+                .HasOne(p => p.User)
+                .WithOne(u => u.Profile)
+                .HasForeignKey<UserProfile>(p => p.UserId)
+                .OnDelete(DeleteBehavior.Cascade);
 
             // Chat entities
             modelBuilder.Entity<Message>()

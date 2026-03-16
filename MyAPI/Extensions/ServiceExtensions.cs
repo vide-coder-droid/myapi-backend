@@ -9,6 +9,7 @@ public static class ServiceExtensions
     {
         services.AddScoped<IUserRepository, DbUserRepository>();
         services.AddSingleton<JwtService>();
+        services.AddScoped<CloudinaryService>();
 
         return services;
     }

@@ -1,23 +1,24 @@
 using Microsoft.AspNetCore.SignalR;
+using System.Collections.Concurrent;
 
 namespace MyAPI.Hubs
 {
     public class ChatHub : Hub
     {
-        // Lưu user online
-        private static Dictionary<string, string> OnlineUsers = new();
+        // Thread-safe online users
+        private static ConcurrentDictionary<string, string> OnlineUsers = new();
 
         // Khi user connect
         public override async Task OnConnectedAsync()
         {
-            var userId = Context.GetHttpContext()?.Request.Query["userId"];
+            var userId = Context.GetHttpContext()?.Request.Query["userId"].ToString();
 
             if (!string.IsNullOrEmpty(userId))
             {
                 OnlineUsers[userId] = Context.ConnectionId;
-            }
 
-            await Clients.All.SendAsync("UserOnline", userId);
+                await Clients.All.SendAsync("UserOnline", userId);
+            }
 
             await base.OnConnectedAsync();
         }
@@ -29,7 +30,8 @@ namespace MyAPI.Hubs
 
             if (!string.IsNullOrEmpty(user.Key))
             {
-                OnlineUsers.Remove(user.Key);
+                OnlineUsers.TryRemove(user.Key, out _);
+
                 await Clients.All.SendAsync("UserOffline", user.Key);
             }
 
@@ -43,12 +45,12 @@ namespace MyAPI.Hubs
         }
 
         // Private chat
-        public async Task SendPrivateMessage(string toUserId, string message)
+        public async Task SendPrivateMessage(string fromUserId, string toUserId, string message)
         {
             if (OnlineUsers.TryGetValue(toUserId, out var connectionId))
             {
                 await Clients.Client(connectionId)
-                    .SendAsync("ReceivePrivateMessage", Context.ConnectionId, message);
+                    .SendAsync("ReceivePrivateMessage", fromUserId, message);
             }
         }
 
