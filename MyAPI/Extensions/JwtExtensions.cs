@@ -29,7 +29,9 @@ public static class JwtExtensions
 
                         IssuerSigningKey =
                             new SymmetricSecurityKey(
-                                Encoding.UTF8.GetBytes(key))
+                                Encoding.UTF8.GetBytes(key)),
+                        NameClaimType = "username",
+                        RoleClaimType = "role"
                     };
 
                 options.Events = new JwtBearerEvents
