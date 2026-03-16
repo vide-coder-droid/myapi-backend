@@ -3,6 +3,7 @@ using MyAPI.Extensions;
 using Scalar.AspNetCore;
 using Serilog;
 using MyAPI.Hubs;
+using MyAPI.Middleware;
 using Microsoft.AspNetCore.Http.Features;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -57,6 +58,7 @@ if (!app.Environment.IsDevelopment())
 app.UseRateLimiter();
 
 app.UseAuthentication();
+app.UseMiddleware<ActiveUserMiddleware>();
 app.UseAuthorization();
 
 // Routes

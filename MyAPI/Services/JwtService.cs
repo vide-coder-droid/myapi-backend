@@ -19,13 +19,8 @@ namespace MyAPI.Services
         {
             var secret = Environment.GetEnvironmentVariable("JWT_SECRET_KEY");
 
-            if (string.IsNullOrEmpty(secret))
-            {
-                throw new Exception("JWT_SECRET_KEY not found in environment variables");
-            }
-
             var key = new SymmetricSecurityKey(
-                Encoding.UTF8.GetBytes(secret)
+                Encoding.UTF8.GetBytes(secret!)
             );
 
             var creds = new SigningCredentials(
@@ -34,18 +29,23 @@ namespace MyAPI.Services
             );
 
             var claims = new List<Claim>
-{
-            new Claim(JwtRegisteredClaimNames.Sub, user.Username),
-            new Claim(ClaimTypes.Name, user.Username),
-            new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
-};
-
-            foreach (var userRole in user.UserRoles)
             {
-                claims.Add(new Claim(ClaimTypes.Role, userRole.Role.Name));
-            }
+                new Claim("sub", user.Username),
+                new Claim("username", user.Username),
+                new Claim("jti", Guid.NewGuid().ToString())
+            };
 
-            var expiration = DateTime.UtcNow.AddHours(2);
+            foreach (var role in user.UserRoles)
+            {
+                claims.Add(new Claim("role", role.Role.Name));
+
+                foreach (var permission in role.Role.RolePermissions)
+                {
+                    claims.Add(
+                        new Claim("permission", permission.Permission.Name)
+                    );
+                }
+            }
 
             var token = new JwtSecurityToken(
                 issuer: _config["Jwt:Issuer"],

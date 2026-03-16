@@ -4,19 +4,19 @@ namespace MyAPI.Models.Entities
 {
     public class User
     {
-        public int Id { get; set; }
+        public Guid Id { get; set; } = Guid.NewGuid();
 
         [Required]
-        public string Username { get; set; }
+        public required string Username { get; set; }
 
         [Required]
-        public string PasswordHash { get; set; }
+        public required string PasswordHash { get; set; }
 
         public string? Email { get; set; }
 
         public bool IsActive { get; set; }
 
-        public DateTime CreatedAt { get; set; }
+        public DateTime CreatedAt { get; set; } =  DateTime.UtcNow;
 
         public UserProfile? Profile { get; set; }
 

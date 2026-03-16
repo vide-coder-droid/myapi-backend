@@ -6,10 +6,10 @@ namespace MyAPI.Models.Entities;
 public class UserProfile
 {
     [Key]
-    public int Id { get; set; }
+    public Guid Id { get; set; } = Guid.NewGuid();
 
     [Required]
-    public int UserId { get; set; }
+    public Guid UserId { get; set; }
 
     [MaxLength(100)]
     public string? FullName { get; set; }

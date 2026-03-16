@@ -2,7 +2,7 @@ namespace MyAPI.Models.Entities;
 
 public class ConversationMember
 {
-    public Guid Id { get; set; }
+    public Guid Id { get; set; } = Guid.NewGuid();
 
     public Guid ConversationId { get; set; }
 
@@ -13,4 +13,6 @@ public class ConversationMember
     public DateTime JoinedAt { get; set; } = DateTime.UtcNow;
 
     public Conversation Conversation { get; set; } = null!;
+
+    public User User { get; set; } = null!;
 }

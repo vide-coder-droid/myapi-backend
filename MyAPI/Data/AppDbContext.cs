@@ -75,7 +75,7 @@ namespace MyAPI.Data
                 .HasIndex(x => new { x.ConversationId, x.CreatedAt });
 
             modelBuilder.Entity<ConversationMember>()
-                .HasIndex(x => x.UserId);
+                .HasIndex(x => new { x.UserId, x.ConversationId });
 
             modelBuilder.Entity<MessageRead>()
                 .HasIndex(x => x.MessageId);

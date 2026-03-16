@@ -4,10 +4,12 @@ namespace MyAPI.Repositories
 {
     public interface IUserRepository
     {
-        User GetUser(string username, string password);
-        User? GetByUsername(string username);
+        Task<User?> GetUserAsync(string username);
 
-        void AddUser(User user, string roleName);
-        void DeleteUser(User user);
+        Task<User?> GetByEmailAsync(string email);
+
+        Task AddUserAsync(User user, string role);
+
+        Task DisableUserAsync(User user);
     }
 }

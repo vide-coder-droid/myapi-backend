@@ -98,7 +98,7 @@ namespace MyAPI.Migrations
 
                     b.HasIndex("ConversationId");
 
-                    b.HasIndex("UserId");
+                    b.HasIndex("UserId", "ConversationId");
 
                     b.ToTable("ConversationMembers");
                 });
@@ -134,6 +134,8 @@ namespace MyAPI.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("SenderId");
+
                     b.HasIndex("ConversationId", "CreatedAt");
 
                     b.ToTable("Messages");
@@ -157,6 +159,8 @@ namespace MyAPI.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("MessageId");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("MessageReads");
                 });
@@ -215,11 +219,9 @@ namespace MyAPI.Migrations
 
             modelBuilder.Entity("MyAPI.Models.Entities.User", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+                        .HasColumnType("uuid");
 
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("timestamp with time zone");
@@ -245,11 +247,9 @@ namespace MyAPI.Migrations
 
             modelBuilder.Entity("MyAPI.Models.Entities.UserProfile", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+                        .HasColumnType("uuid");
 
                     b.Property<string>("Address")
                         .HasColumnType("text");
@@ -277,8 +277,8 @@ namespace MyAPI.Migrations
                     b.Property<string>("Phone")
                         .HasColumnType("text");
 
-                    b.Property<int>("UserId")
-                        .HasColumnType("integer");
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uuid");
 
                     b.HasKey("Id");
 
@@ -290,8 +290,8 @@ namespace MyAPI.Migrations
 
             modelBuilder.Entity("MyAPI.Models.Entities.UserRole", b =>
                 {
-                    b.Property<int>("UserId")
-                        .HasColumnType("integer");
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uuid");
 
                     b.Property<int>("RoleId")
                         .HasColumnType("integer");
@@ -322,7 +322,15 @@ namespace MyAPI.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("MyAPI.Models.Entities.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.Navigation("Conversation");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("MyAPI.Models.Entities.Message", b =>
@@ -333,7 +341,15 @@ namespace MyAPI.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("MyAPI.Models.Entities.User", "Sender")
+                        .WithMany()
+                        .HasForeignKey("SenderId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.Navigation("Conversation");
+
+                    b.Navigation("Sender");
                 });
 
             modelBuilder.Entity("MyAPI.Models.Entities.MessageRead", b =>
@@ -344,7 +360,15 @@ namespace MyAPI.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("MyAPI.Models.Entities.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.Navigation("Message");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("MyAPI.Models.Entities.RolePermission", b =>

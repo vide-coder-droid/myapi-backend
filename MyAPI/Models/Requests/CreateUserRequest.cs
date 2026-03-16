@@ -1,13 +1,20 @@
-﻿namespace MyAPI.Models.Requests
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace MyAPI.Models.Requests
 {
     public class CreateUserRequest
     {
-        public string Username { get; set; }
+        [Required]
+        [MinLength(4)]
+        public required string Username { get; set; }
 
-        public string Password { get; set; }
+        [Required]
+        [MinLength(8)]
+        public required string Password { get; set; }
 
+        [EmailAddress]
         public string? Email { get; set; }
 
-        public string Role { get; set; } = "User";
+        public string? Role { get; set; }
     }
 }

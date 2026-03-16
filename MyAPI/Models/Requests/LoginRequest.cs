@@ -1,9 +1,14 @@
-﻿namespace MyAPI.Models.Requests
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace MyAPI.Models.Requests
 {
     public class LoginRequest
     {
-        public string Username { get; set; }
+        [Required]
+        [MinLength(4)]
+        public required string Username { get; set; }
 
-        public string Password { get; set; }
+        [Required]
+        public required string Password { get; set; }
     }
 }

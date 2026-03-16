@@ -1,9 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using MyAPI.Models.Entities;
+using MyAPI.Services.Auth;
 using MyAPI.Models.Requests;
-using MyAPI.Repositories;
-using MyAPI.Services;
 
 namespace MyAPI.Controllers;
 
@@ -11,105 +9,61 @@ namespace MyAPI.Controllers;
 [Route("api/[controller]")]
 public class AuthController : ControllerBase
 {
-    private readonly IUserRepository _repo;
-    private readonly JwtService _jwt;
+    private readonly IAuthService _service;
 
-    public AuthController(IUserRepository repo, JwtService jwt)
+    public AuthController(IAuthService service)
     {
-        _repo = repo;
-        _jwt = jwt;
+        _service = service;
     }
+
     [AllowAnonymous]
     [HttpPost("login")]
-    public IActionResult Login([FromBody] LoginRequest req)
+    public async Task<IActionResult> Login(LoginRequest req)
     {
-        if (req == null || string.IsNullOrWhiteSpace(req.Username) || string.IsNullOrWhiteSpace(req.Password))
-        {
-            return BadRequest(new
-            {
-                success = false,
-                message = "Username or password is required"
-            });
-        }
+        var result = await _service.LoginAsync(req);
 
-        var user = _repo.GetUser(req.Username, req.Password);
+        if (!result.Success)
+            return Unauthorized(result);
 
-        if (user == null)
-        {
-            return Unauthorized(new
-            {
-                success = false,
-                message = "Invalid username or password"
-            });
-        }
-
-        var accessToken = _jwt.GenerateToken(user);
-
-        return Ok(new
-        {
-            accessToken = accessToken,
-            expiresIn = 7200, // seconds = 2 hours
-            success = true,
-            message = "Login successful",
-        });
+        return Ok(result);
     }
-
 
     [Authorize(Roles = "Admin")]
     [HttpPost("create-user")]
-    public IActionResult CreateUser([FromBody] CreateUserRequest req)
+    public async Task<IActionResult> CreateUser(CreateUserRequest req)
     {
-        if (string.IsNullOrWhiteSpace(req.Username) || string.IsNullOrWhiteSpace(req.Password))
-        {
-            return BadRequest("Username and Password required");
-        }
+        var result = await _service.CreateUserAsync(req, User);
 
-        // check user tồn tại
-        var existing = _repo.GetByUsername(req.Username);
-        if (existing != null)
-        {
-            return BadRequest("User already exists");
-        }
+        if (!result.Success)
+            return BadRequest(result);
 
-        var user = new User
-        {
-            Username = req.Username,
-            PasswordHash = BCrypt.Net.BCrypt.HashPassword(req.Password),
-            Email = req.Email,
-            IsActive = true,
-            CreatedAt = DateTime.UtcNow
-        };
-
-        _repo.AddUser(user, req.Role);
-
-        return Ok(new
-        {
-            success = true,
-            message = "User created"
-        });
+        return Ok(result);
     }
 
-    [Authorize(Roles = "Admin")]
-    [HttpDelete("delete-user/{username}")]
-    public IActionResult DeleteUser(string username)
+    [AllowAnonymous]
+    [HttpPost("register")]
+    public async Task<IActionResult> Register(RegisterRequest req)
     {
-        var user = _repo.GetByUsername(username);
+        var result = await _service.RegisterAsync(req);
 
-        if (user == null)
-        {
-            return NotFound(new
-            {
-                success = false,
-                message = "User not found"
-            });
-        }
+        if (!result.Success)
+            return BadRequest(result);
 
-        _repo.DeleteUser(user);
+        return Ok(result);
+    }
 
-        return Ok(new
-        {
-            success = true,
-            message = "User deleted"
-        });
+    [Authorize]
+    [HttpDelete("delete-user/{username}")]
+    public async Task<IActionResult> DeleteUser(string username)
+    {
+        var currentUser = User.Identity?.Name ?? "";
+        var isAdmin = User.IsInRole("Admin");
+
+        var result = await _service.DeleteUserAsync(username, currentUser, isAdmin);
+
+        if (!result.Success)
+            return BadRequest(result);
+
+        return Ok(result);
     }
 }

@@ -2,7 +2,7 @@ namespace MyAPI.Models.Entities;
 
 public class MessageRead
 {
-    public Guid Id { get; set; }
+    public Guid Id { get; set; } = Guid.NewGuid();
 
     public Guid MessageId { get; set; }
 
@@ -11,4 +11,6 @@ public class MessageRead
     public DateTime ReadAt { get; set; } = DateTime.UtcNow;
 
     public Message Message { get; set; } = null!;
+
+    public User User { get; set; } = null!;
 }

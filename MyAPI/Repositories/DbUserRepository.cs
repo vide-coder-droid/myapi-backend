@@ -1,6 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using MyAPI.Data;
-using BCrypt.Net;
 using MyAPI.Models.Entities;
 
 namespace MyAPI.Repositories
@@ -9,51 +8,71 @@ namespace MyAPI.Repositories
     {
         private readonly AppDbContext _db;
 
+        private const string DefaultAvatar =
+        "https://res.cloudinary.com/devtzdqde/raw/upload/v1773621355/images/93147492-dbc1-404a-9822-86e16ae4dbfa.jpg";
+
         public DbUserRepository(AppDbContext db)
         {
             _db = db;
         }
 
-        public User GetUser(string username, string password)
+        public async Task<User?> GetUserAsync(string username)
         {
-            var user = _db.Users
-                .Include(u => u.UserRoles)
-                .ThenInclude(ur => ur.Role)
-                .FirstOrDefault(x => x.Username == username);
+            username = username.ToLower();
 
-            if (user == null)
-                return null;
-
-            bool isValid = BCrypt.Net.BCrypt.Verify(password, user.PasswordHash);
-
-            return isValid ? user : null;
+            return await _db.Users
+                .Include(x => x.Profile)
+                .Include(x => x.UserRoles)
+                    .ThenInclude(x => x.Role)
+                        .ThenInclude(r => r.RolePermissions)
+                            .ThenInclude(rp => rp.Permission)
+                .FirstOrDefaultAsync(x => x.Username.ToLower() == username);
         }
 
-        public User? GetByUsername(string username)
+        public async Task<User?> GetByEmailAsync(string email)
         {
-            return _db.Users.FirstOrDefault(x => x.Username == username);
+            return await _db.Users
+                .FirstOrDefaultAsync(x => x.Email == email);
         }
 
-        public void AddUser(User user, string roleName)
+        public async Task AddUserAsync(User user, string roleName)
         {
-            _db.Users.Add(user);
-            _db.SaveChanges();
+            // tìm role
+            var role = await _db.Roles
+                .FirstOrDefaultAsync(x => x.Name == roleName);
 
-            var role = _db.Roles.First(x => x.Name == roleName);
+            if (role == null)
+                throw new Exception($"Role '{roleName}' not found");
 
-            _db.UserRoles.Add(new UserRole
+            // thêm user
+            await _db.Users.AddAsync(user);
+
+            // tạo profile mặc định
+            var profile = new UserProfile
+            {
+                UserId = user.Id,
+                FullName = user.Username,
+                AvatarUrl = DefaultAvatar
+            };
+
+            await _db.UserProfiles.AddAsync(profile);
+
+            // gán role
+            await _db.UserRoles.AddAsync(new UserRole
             {
                 UserId = user.Id,
                 RoleId = role.Id
             });
 
-            _db.SaveChanges();
+            // lưu
+            await _db.SaveChangesAsync();
         }
 
-        public void DeleteUser(User user)
+        public async Task DisableUserAsync(User user)
         {
-            _db?.Users.Remove(user);
-            _db?.SaveChanges();
+            user.IsActive = false;
+
+            await _db.SaveChangesAsync();
         }
     }
 }

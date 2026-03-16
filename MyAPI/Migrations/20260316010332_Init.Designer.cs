@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace MyAPI.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20260315141511_AddChatIndexes")]
-    partial class AddChatIndexes
+    [Migration("20260316010332_Init")]
+    partial class Init
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -101,7 +101,7 @@ namespace MyAPI.Migrations
 
                     b.HasIndex("ConversationId");
 
-                    b.HasIndex("UserId");
+                    b.HasIndex("UserId", "ConversationId");
 
                     b.ToTable("ConversationMembers");
                 });
@@ -137,6 +137,8 @@ namespace MyAPI.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("SenderId");
+
                     b.HasIndex("ConversationId", "CreatedAt");
 
                     b.ToTable("Messages");
@@ -160,6 +162,8 @@ namespace MyAPI.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("MessageId");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("MessageReads");
                 });
@@ -218,11 +222,9 @@ namespace MyAPI.Migrations
 
             modelBuilder.Entity("MyAPI.Models.Entities.User", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+                        .HasColumnType("uuid");
 
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("timestamp with time zone");
@@ -246,10 +248,53 @@ namespace MyAPI.Migrations
                     b.ToTable("Users");
                 });
 
+            modelBuilder.Entity("MyAPI.Models.Entities.UserProfile", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("Address")
+                        .HasColumnType("text");
+
+                    b.Property<string>("AvatarUrl")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Bio")
+                        .HasMaxLength(200)
+                        .HasColumnType("character varying(200)");
+
+                    b.Property<DateTime?>("Birthday")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("FullName")
+                        .HasMaxLength(100)
+                        .HasColumnType("character varying(100)");
+
+                    b.Property<string>("Gender")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Phone")
+                        .HasColumnType("text");
+
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uuid");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId")
+                        .IsUnique();
+
+                    b.ToTable("UserProfiles");
+                });
+
             modelBuilder.Entity("MyAPI.Models.Entities.UserRole", b =>
                 {
-                    b.Property<int>("UserId")
-                        .HasColumnType("integer");
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uuid");
 
                     b.Property<int>("RoleId")
                         .HasColumnType("integer");
@@ -280,7 +325,15 @@ namespace MyAPI.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("MyAPI.Models.Entities.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.Navigation("Conversation");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("MyAPI.Models.Entities.Message", b =>
@@ -291,7 +344,15 @@ namespace MyAPI.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("MyAPI.Models.Entities.User", "Sender")
+                        .WithMany()
+                        .HasForeignKey("SenderId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.Navigation("Conversation");
+
+                    b.Navigation("Sender");
                 });
 
             modelBuilder.Entity("MyAPI.Models.Entities.MessageRead", b =>
@@ -302,7 +363,15 @@ namespace MyAPI.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("MyAPI.Models.Entities.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.Navigation("Message");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("MyAPI.Models.Entities.RolePermission", b =>
@@ -322,6 +391,17 @@ namespace MyAPI.Migrations
                     b.Navigation("Permission");
 
                     b.Navigation("Role");
+                });
+
+            modelBuilder.Entity("MyAPI.Models.Entities.UserProfile", b =>
+                {
+                    b.HasOne("MyAPI.Models.Entities.User", "User")
+                        .WithOne("Profile")
+                        .HasForeignKey("MyAPI.Models.Entities.UserProfile", "UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("MyAPI.Models.Entities.UserRole", b =>
@@ -369,6 +449,8 @@ namespace MyAPI.Migrations
 
             modelBuilder.Entity("MyAPI.Models.Entities.User", b =>
                 {
+                    b.Navigation("Profile");
+
                     b.Navigation("UserRoles");
                 });
 #pragma warning restore 612, 618
