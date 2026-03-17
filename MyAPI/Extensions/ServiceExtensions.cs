@@ -14,6 +14,10 @@ public static class ServiceExtensions
         services.AddScoped<IUserRepository, DbUserRepository>();
         services.AddScoped<IAuthService, AuthService>();
 
+        services.AddSingleton<OtpService>();
+        services.AddSingleton<EmailService>();
+        services.AddSingleton<RedisService>();
+
         services.AddScoped<IProfileRepository, ProfileRepository>();
         services.AddScoped<IProfileService, ProfileService>();
 

@@ -41,6 +41,30 @@ public class AuthController : ControllerBase
     }
 
     [AllowAnonymous]
+    [HttpPost("send-otp")]
+    public async Task<IActionResult> SendOtp(SendOtpRequest req)
+    {
+        var result = await _service.SendOtpAsync(req);
+
+        if (!result.Success)
+            return BadRequest(result);
+
+        return Ok(result);
+    }
+
+    [AllowAnonymous]
+    [HttpPost("verify-otp")]
+    public async Task<IActionResult> VerifyOtp(VerifyOtpRequest req)
+    {
+        var result = await _service.VerifyOtpAsync(req);
+
+        if (!result.Success)
+            return BadRequest(result);
+
+        return Ok(result);
+    }
+    
+    [AllowAnonymous]
     [HttpPost("register")]
     public async Task<IActionResult> Register(RegisterRequest req)
     {

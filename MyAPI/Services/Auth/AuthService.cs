@@ -11,12 +11,16 @@ namespace MyAPI.Services.Auth
         private readonly IUserRepository _repo;
         private readonly JwtService _jwt;
         private readonly IConfiguration _config;
+        private readonly EmailService _emailService;
+        private readonly OtpService _otpService;
 
-        public AuthService(IUserRepository repo, JwtService jwt, IConfiguration config)
+        public AuthService(IUserRepository repo, JwtService jwt, IConfiguration config, EmailService emailService, OtpService otpService)
         {
             _repo = repo;
             _jwt = jwt;
             _config = config;
+            _emailService = emailService;
+            _otpService = otpService;
         }
 
         public async Task<ApiResponse<object>> LoginAsync(LoginRequest req)
@@ -82,24 +86,55 @@ namespace MyAPI.Services.Auth
             return ApiResponse<object>.Ok(new { message = "User created" });
         }
 
+        public async Task<ApiResponse<object>> SendOtpAsync(SendOtpRequest req)
+        {
+            var exist = await _repo.GetByEmailAsync(req.Email);
+            if (exist != null)
+                return ApiResponse<object>.Fail("Email đã tồn tại");
+
+            var otp = await _otpService.GenerateOtpAsync(req.Email);
+
+            _ = Task.Run(() => _emailService.SendOtpEmail(req.Email, otp));
+
+            return ApiResponse<object>.Ok(null, "OTP sent");
+        }
+
+        public async Task<ApiResponse<object>> VerifyOtpAsync(VerifyOtpRequest req)
+        {
+            var valid = await _otpService.VerifyOtpAsync(req.Email, req.Otp);
+
+            if (!valid)
+                return ApiResponse<object>.Fail("OTP không đúng");
+
+            var token = await _otpService.GenerateRegisterTokenAsync(req.Email);
+
+            return ApiResponse<object>.Ok(new { token });
+        }
+
         public async Task<ApiResponse<object>> RegisterAsync(RegisterRequest req)
         {
-            var exist = await _repo.GetUserAsync(req.Username);
+            var email = await _otpService.GetEmailFromTokenAsync(req.Token);
 
+            if (email == null)
+                return ApiResponse<object>.Fail("Chưa verify OTP");
+
+            var exist = await _repo.GetUserAsync(req.Username);
             if (exist != null)
-                return ApiResponse<object>.Fail("Username already exists");
+                return ApiResponse<object>.Fail("Username đã tồn tại");
 
             var user = new User
             {
                 Username = req.Username,
                 PasswordHash = BCrypt.Net.BCrypt.HashPassword(req.Password),
-                Email = req.Email,
+                Email = email,
                 IsActive = true
             };
 
             await _repo.AddUserAsync(user, "User");
 
-            return ApiResponse<object>.Ok(new { message = "Account created" });
+            await _otpService.RemoveTokenAsync(req.Token);
+
+            return ApiResponse<object>.Ok(null, "Account created");
         }
 
         public async Task<ApiResponse<object>> DeleteUserAsync(string username, string currentUser, bool isAdmin)
