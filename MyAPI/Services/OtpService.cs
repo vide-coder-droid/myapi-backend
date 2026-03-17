@@ -17,24 +17,38 @@ public class OtpService
     private string TokenKey(string token) => $"verify:{token}";
 
     // ===== 1. Generate OTP =====
-    public async Task<string> GenerateOtpAsync(string email)
+    public async Task<(bool Success, string Message, string? Otp)> GenerateOtpAsync(string email)
     {
-        // rate limit (1 lần / 60s)
-        if (await _redis.KeyExistsAsync(CooldownKey(email)))
-            throw new Exception("Gửi OTP quá nhanh. Vui lòng thử lại sau.");
+        try
+        {
+            var cdKey = CooldownKey(email);
 
-        var otp = RandomNumberGenerator.GetInt32(100000, 999999).ToString();
+            // check cooldown
+            if (await _redis.KeyExistsAsync(cdKey))
+            {
+                var ttl = await _redis.KeyTimeToLiveAsync(cdKey);
+                var seconds = ttl?.TotalSeconds ?? 0;
 
-        // lưu OTP (5 phút)
-        await _redis.StringSetAsync(OtpKey(email), otp, TimeSpan.FromMinutes(5));
+                return (false, $"Vui lòng đợi {Math.Ceiling(seconds)} giây để gửi lại OTP", null);
+            }
 
-        // set cooldown 60s
-        await _redis.StringSetAsync(CooldownKey(email), "1", TimeSpan.FromSeconds(60));
+            var otp = RandomNumberGenerator.GetInt32(100000, 999999).ToString();
 
-        // reset số lần sai
-        await _redis.KeyDeleteAsync(AttemptKey(email));
+            // lưu OTP 5 phút
+            await _redis.StringSetAsync(OtpKey(email), otp, TimeSpan.FromMinutes(5));
 
-        return otp;
+            // cooldown 60s
+            await _redis.StringSetAsync(cdKey, "1", TimeSpan.FromSeconds(60));
+
+            // reset attempt
+            await _redis.KeyDeleteAsync(AttemptKey(email));
+
+            return (true, "OTP created", otp);
+        }
+        catch
+        {
+            return (false, "Không thể tạo OTP, thử lại sau", null);
+        }
     }
 
     // ===== 2. Verify OTP =====

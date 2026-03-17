@@ -88,15 +88,27 @@ namespace MyAPI.Services.Auth
 
         public async Task<ApiResponse<object>> SendOtpAsync(SendOtpRequest req)
         {
-            var exist = await _repo.GetByEmailAsync(req.Email);
-            if (exist != null)
-                return ApiResponse<object>.Fail("Email đã tồn tại");
+            try
+            {
+                var exist = await _repo.GetByEmailAsync(req.Email);
+                if (exist != null)
+                    return ApiResponse<object>.Fail("Email đã tồn tại");
 
-            var otp = await _otpService.GenerateOtpAsync(req.Email);
+                var result = await _otpService.GenerateOtpAsync(req.Email);
 
-            _ = Task.Run(() => _emailService.SendOtpEmail(req.Email, otp));
+                if (!result.Success)
+                {
+                    return ApiResponse<object>.Fail(result.Message);
+                }
 
-            return ApiResponse<object>.Ok(null, "OTP sent");
+                _ = Task.Run(() => _emailService.SendOtpEmail(req.Email, result.Otp!));
+
+                return ApiResponse<object>.Ok(null, "OTP sent");
+            }
+            catch
+            {
+                return ApiResponse<object>.Fail("Lỗi hệ thống, vui lòng thử lại");
+            }
         }
 
         public async Task<ApiResponse<object>> VerifyOtpAsync(VerifyOtpRequest req)
@@ -108,7 +120,7 @@ namespace MyAPI.Services.Auth
 
             var token = await _otpService.GenerateRegisterTokenAsync(req.Email);
 
-            return ApiResponse<object>.Ok(new { token });
+            return ApiResponse<object>.Ok(new { token }, "OTP verified successfully");
         }
 
         public async Task<ApiResponse<object>> RegisterAsync(RegisterRequest req)

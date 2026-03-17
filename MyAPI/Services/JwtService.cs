@@ -37,7 +37,7 @@ namespace MyAPI.Services
 
             foreach (var role in user.UserRoles)
             {
-                claims.Add(new Claim("role", role.Role.Name));
+                claims.Add(new Claim(ClaimTypes.Role, role.Role.Name));
 
                 foreach (var permission in role.Role.RolePermissions)
                 {
