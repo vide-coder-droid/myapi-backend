@@ -32,7 +32,7 @@ namespace MyAPI.Repositories
         public async Task<User?> GetByEmailAsync(string email)
         {
             return await _db.Users
-                .FirstOrDefaultAsync(x => x.Email == email);
+                .FirstOrDefaultAsync(x => x.Email.ToLower() == email.ToLower());
         }
 
         public async Task AddUserAsync(User user, string roleName)
