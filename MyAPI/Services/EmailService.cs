@@ -1,25 +1,44 @@
-using SendGrid;
-using SendGrid.Helpers.Mail;
+using MailKit.Net.Smtp;
+using MimeKit;
+using MailKit.Security;
 
 public class EmailService
 {
-    private readonly string _apiKey;
+    private readonly string _user;
+    private readonly string _pass;
 
     public EmailService(IConfiguration config)
     {
-        _apiKey = config["SendGrid:ApiKey"]!;
+        _user = config["Brevo:User"]!;
+        _pass = config["Brevo:Pass"]!;
     }
 
     public async Task SendOtpEmail(string toEmail, string otp)
     {
-        var client = new SendGridClient(_apiKey);
+        var message = new MimeMessage();
 
-        var from = new EmailAddress("noreply@vanda.id.vn", "Zentra App");
-        var to = new EmailAddress(toEmail);
+        message.From.Add(new MailboxAddress("Zentra App", "noreply@vanda.id.vn"));
+        message.To.Add(MailboxAddress.Parse(toEmail));
+        message.Subject = "Mã OTP xác thực";
 
-        var subject = "Mã OTP xác thực";
+        // ✅ dùng HTML đẹp
+        message.Body = new TextPart("html")
+        {
+            Text = GetOtpTemplate(otp)
+        };
 
-        var html = $@"
+        using var client = new SmtpClient();
+
+        await client.ConnectAsync("smtp-relay.brevo.com", 587, SecureSocketOptions.StartTls);
+        await client.AuthenticateAsync(_user, _pass);
+
+        await client.SendAsync(message);
+        await client.DisconnectAsync(true);
+    }
+
+    private string GetOtpTemplate(string otp)
+    {
+        return $@"
 <!DOCTYPE html>
 <html>
 <head>
@@ -50,11 +69,12 @@ public class EmailService
       font-weight: bold;
       color: #2d89ef;
       margin: 20px 0;
-      letter-spacing: 5px;
+      letter-spacing: 6px;
     }}
     .text {{
       color: #555;
       font-size: 14px;
+      line-height: 1.5;
     }}
     .footer {{
       margin-top: 30px;
@@ -83,11 +103,6 @@ public class EmailService
     </div>
   </div>
 </body>
-</html>
-";
-
-        var msg = MailHelper.CreateSingleEmail(from, to, subject, null, html);
-
-        await client.SendEmailAsync(msg);
+</html>";
     }
 }
