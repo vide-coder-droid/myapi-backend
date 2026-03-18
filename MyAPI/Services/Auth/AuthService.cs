@@ -83,6 +83,7 @@ namespace MyAPI.Services.Auth
             return ApiResponse<object>.Ok(new
             {
                 requireOtp = true,
+                email = email,
                 message = "OTP sent to your email to verify new device"
             });
         }
