@@ -4,41 +4,44 @@ using MailKit.Security;
 
 public class EmailService
 {
-    private readonly string _user;
-    private readonly string _pass;
+  private readonly string _user;
+  private readonly string _pass;
 
-    public EmailService(IConfiguration config)
+  public EmailService(IConfiguration config)
+  {
+    // đọc từ appsettings.json nếu có, fallback môi trường
+    _user = config["Brevo:User"] ?? Environment.GetEnvironmentVariable("Brevo__User")!;
+    _pass = config["Brevo:Pass"] ?? Environment.GetEnvironmentVariable("Brevo__Pass")!;
+
+    // debug
+    Console.WriteLine($"User: {_user}, Pass is null? {_pass == null}");
+  }
+  public async Task SendOtpEmail(string toEmail, string otp)
+  {
+    var message = new MimeMessage();
+
+    message.From.Add(new MailboxAddress("Zentra App", "noreply@vanda.id.vn"));
+    message.To.Add(MailboxAddress.Parse(toEmail));
+    message.Subject = "Mã OTP xác thực";
+
+    // ✅ dùng HTML đẹp
+    message.Body = new TextPart("html")
     {
-        _user = config["Brevo:User"]!;
-        _pass = config["Brevo:Pass"]!;
-    }
+      Text = GetOtpTemplate(otp)
+    };
 
-    public async Task SendOtpEmail(string toEmail, string otp)
-    {
-        var message = new MimeMessage();
+    using var client = new SmtpClient();
 
-        message.From.Add(new MailboxAddress("Zentra App", "noreply@vanda.id.vn"));
-        message.To.Add(MailboxAddress.Parse(toEmail));
-        message.Subject = "Mã OTP xác thực";
+    await client.ConnectAsync("smtp-relay.brevo.com", 587, SecureSocketOptions.StartTls);
+    await client.AuthenticateAsync(_user, _pass);
 
-        // ✅ dùng HTML đẹp
-        message.Body = new TextPart("html")
-        {
-            Text = GetOtpTemplate(otp)
-        };
+    await client.SendAsync(message);
+    await client.DisconnectAsync(true);
+  }
 
-        using var client = new SmtpClient();
-
-        await client.ConnectAsync("smtp-relay.brevo.com", 587, SecureSocketOptions.StartTls);
-        await client.AuthenticateAsync(_user, _pass);
-
-        await client.SendAsync(message);
-        await client.DisconnectAsync(true);
-    }
-
-    private string GetOtpTemplate(string otp)
-    {
-        return $@"
+  private string GetOtpTemplate(string otp)
+  {
+    return $@"
 <!DOCTYPE html>
 <html>
 <head>
@@ -104,5 +107,5 @@ public class EmailService
   </div>
 </body>
 </html>";
-    }
+  }
 }
