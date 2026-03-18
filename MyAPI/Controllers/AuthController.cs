@@ -147,3 +147,35 @@ public class AuthController : ControllerBase
         return Ok(result);
     }
 }
+
+/*
+Người dùng
+   │
+   ▼
+Đăng nhập (Login API)
+   │
+   ├─ Nếu thiết bị đã tồn tại
+   │       │
+   │       ▼
+   │   Cập nhật Refresh Token + LastActive
+   │       │
+   │       ▼
+   │    Trả về Access Token + Refresh Token
+   │
+   └─ Nếu thiết bị mới
+           │
+           ▼
+     Gửi OTP đến Email
+           │
+           ▼
+     Người dùng nhập OTP
+           │
+           ▼
+     Xác thực OTP
+           │
+           ▼
+   Tạo thiết bị mới trong DB
+           │
+           ▼
+Trả về Access Token + Refresh Token
+*/

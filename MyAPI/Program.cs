@@ -18,7 +18,7 @@ builder.ConfigureLogging();
 builder.Services.AddControllers();
 builder.Services.AddApplicationServices();
 
-// Infrastructure
+// Infrastructure / Middleware Config
 builder.Services.AddDatabase(builder.Configuration);
 builder.Services.AddJwtAuthentication(builder.Configuration);
 builder.Services.AddSwaggerDocs();
@@ -27,17 +27,17 @@ builder.Services.AddCorsPolicy();
 builder.Services.AddHealthChecks();
 builder.Services.AddSignalRConfig();
 
+// File upload limit
 builder.Services.Configure<FormOptions>(options =>
 {
     options.MultipartBodyLengthLimit = 50 * 1024 * 1024;
 });
 
-var app = builder.Build();
 
-// ===== APPLY MIGRATION FIRST =====
+var app = builder.Build();
 app.ApplyMigration();
 
-// Middleware
+// Middleware Pipeline
 if (app.Environment.IsDevelopment())
 {
     app.UseSwaggerDocs();

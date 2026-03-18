@@ -30,7 +30,7 @@ namespace MyAPI.Services.Auth
         private string GenerateRefreshToken()
         {
             var randomBytes = new byte[64];
-            RandomNumberGenerator.Fill(randomBytes); // thay cho RNGCryptoServiceProvider
+            RandomNumberGenerator.Fill(randomBytes);
             return Convert.ToBase64String(randomBytes);
         }
 
@@ -84,15 +84,15 @@ namespace MyAPI.Services.Auth
             {
                 requireOtp = true,
                 email = email,
-                message = "OTP sent to your email to verify new device"
-            });
+                message = ""
+            }, "OTP sent to your email to verify new device");
         }
 
         public async Task<ApiResponse<object>> VerifyOtpForDeviceAsync(VerifyOtpRequest req)
         {
             // 1. Verify OTP
             var valid = await _otpService.VerifyOtpAsync(req.Email, req.Otp);
-            if (!valid) return ApiResponse<object>.Fail("OTP không đúng");
+            if (!valid) return ApiResponse<object>.Fail("Invalid OTP");
 
             // 2. Lấy user
             var user = await _repo.GetByEmailAsync(req.Email);
@@ -220,7 +220,7 @@ namespace MyAPI.Services.Auth
             {
                 var exist = await _repo.GetByEmailAsync(req.Email);
                 if (exist != null)
-                    return ApiResponse<object>.Fail("Email đã tồn tại");
+                    return ApiResponse<object>.Fail("Email already exists");
 
                 var result = await _otpService.GenerateOtpAsync(req.Email);
 
@@ -244,7 +244,7 @@ namespace MyAPI.Services.Auth
             var valid = await _otpService.VerifyOtpAsync(req.Email, req.Otp);
 
             if (!valid)
-                return ApiResponse<object>.Fail("OTP không đúng");
+                return ApiResponse<object>.Fail("Invalid OTP");
 
             var token = await _otpService.GenerateRegisterTokenAsync(req.Email);
 
@@ -256,11 +256,11 @@ namespace MyAPI.Services.Auth
             var email = await _otpService.GetEmailFromTokenAsync(req.Token);
 
             if (email == null)
-                return ApiResponse<object>.Fail("Chưa verify OTP");
+                return ApiResponse<object>.Fail("OTP not verified");
 
             var exist = await _repo.GetUserAsync(req.Username);
             if (exist != null)
-                return ApiResponse<object>.Fail("Username đã tồn tại");
+                return ApiResponse<object>.Fail("Username already exists");
 
             // 1. Tạo user mới
             var user = new User

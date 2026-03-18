@@ -30,8 +30,14 @@ public class CloudinaryService
             PublicId = Guid.NewGuid().ToString()
         };
 
-        var result = await _cloudinary.UploadAsync(uploadParams);
-
-        return result.SecureUrl.ToString();
+        try
+        {
+            var result = await _cloudinary.UploadAsync(uploadParams);
+            return result.SecureUrl.ToString();
+        }
+        catch (Exception ex)
+        {
+            throw new ApplicationException("Upload failed", ex);
+        }
     }
 }

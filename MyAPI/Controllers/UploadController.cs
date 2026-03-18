@@ -133,3 +133,20 @@ public class UploadController : ControllerBase
         });
     }
 }
+
+/*
+Client (multipart/form-data) 
+     ↓
+UploadController.Upload()
+     ├─ Validate size / extension / MIME
+     ├─ Map folder
+     ↓
+CloudinaryService.UploadAsync()
+     ├─ Stream file
+     ├─ Set RawUploadParams (Folder, PublicId)
+     ├─ Call Cloudinary API
+     ↓
+Return SecureUrl
+     ↓
+Controller trả JSON response
+*/

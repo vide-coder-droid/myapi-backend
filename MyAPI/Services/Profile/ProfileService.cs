@@ -38,7 +38,7 @@ namespace MyAPI.Services.Profile
                     user.Profile?.Phone,
                     user.Profile?.Address
                 }
-            }, "Get profile successful");
+            }, "Profile retrieved successfully");
         }
 
         public async Task<ApiResponse<object>> UpdateProfileAsync(string username, UpdateProfileRequest req)

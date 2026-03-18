@@ -40,17 +40,17 @@ Project minh họa cách triển khai **JWT Authentication trong .NET API** vớ
 MyAPI/
 │
 ├── Controllers/
-│   └── AuthController.cs
+│   └── AuthController.cs             # Controller xử lý auth
 │
 ├── Hubs/
-│   └── ChatHub.cs
+│   └── ChatHub.cs                     # SignalR hub
 │
 ├── Data/
-│   ├── AppDbContext.cs
+│   ├── AppDbContext.cs                # EF Core DbContext
 │   └── Seed/
-│       └── DbSeeder.cs
+│       └── DbSeeder.cs                # Seed dữ liệu mặc định
 │
-├── Extensions/
+├── Extensions/                        # Extension methods cho modular config
 │   ├── CorsExtensions.cs
 │   ├── DatabaseExtensions.cs
 │   ├── JwtExtensions.cs
@@ -58,28 +58,28 @@ MyAPI/
 │   ├── MigrationExtensions.cs
 │   ├── PortExtensions.cs
 │   ├── RateLimitExtensions.cs
-│   ├── ServiceExtensions.cs
+│   ├── ServiceExtensions.cs           # DI Service & Repository
 │   ├── SignalRExtensions.cs
 │   └── SwaggerExtensions.cs
 │
 ├── Models/
 │   ├── Entities/
-│   │   └── User.cs
+│   │   └── User.cs                    # DB entity
 │   │
 │   └── Requests/
-│       └── LoginRequest.cs
+│       └── LoginRequest.cs            # DTO cho request
 │
 ├── Repositories/
-│   ├── IUserRepository.cs
-│   └── DbUserRepository.cs
+│   ├── IUserRepository.cs             # Interface repository
+│   └── DbUserRepository.cs            # Implement repository
 │
 ├── Services/
-│   └── JwtService.cs
+│   └── JwtService.cs                  # Business logic service
 │
-├── Migrations/
+├── Migrations/                         # EF Core migrations
 │
 ├── Dockerfile
-├── Program.cs
+├── Program.cs                          # Entry point, config app
 ├── appsettings.json
 └── MyAPI.csproj
 ```

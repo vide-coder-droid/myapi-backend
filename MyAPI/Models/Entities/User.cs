@@ -21,5 +21,6 @@ namespace MyAPI.Models.Entities
         public UserProfile? Profile { get; set; }
 
         public ICollection<UserRole> UserRoles { get; set; } = new List<UserRole>();
+        public ICollection<UserDevice> UserDevices { get; set; } = new List<UserDevice>();
     }
 }
