@@ -3,6 +3,8 @@ using MyAPI.Models.Requests;
 using MyAPI.Models.Responses;
 using MyAPI.Repositories;
 using System.Security.Claims;
+using System.Security.Cryptography;
+using Microsoft.AspNetCore.Http;
 
 namespace MyAPI.Services.Auth
 {
@@ -13,48 +15,173 @@ namespace MyAPI.Services.Auth
         private readonly IConfiguration _config;
         private readonly EmailService _emailService;
         private readonly OtpService _otpService;
+        private readonly IHttpContextAccessor _httpContextAccessor;
 
-        public AuthService(IUserRepository repo, JwtService jwt, IConfiguration config, EmailService emailService, OtpService otpService)
+        public AuthService(IUserRepository repo, JwtService jwt, IConfiguration config, EmailService emailService, OtpService otpService, IHttpContextAccessor httpContextAccessor)
         {
             _repo = repo;
             _jwt = jwt;
             _config = config;
             _emailService = emailService;
             _otpService = otpService;
+            _httpContextAccessor = httpContextAccessor;
         }
 
-        public async Task<ApiResponse<object>> LoginAsync(LoginRequest req)
+        private string GenerateRefreshToken()
         {
+            var randomBytes = new byte[64];
+            RandomNumberGenerator.Fill(randomBytes); // thay cho RNGCryptoServiceProvider
+            return Convert.ToBase64String(randomBytes);
+        }
+
+        public async Task<ApiResponse<object>> LoginAsync(LoginRequest req, string deviceName, string ip)
+        {
+            // 1. Lấy user
             var user = await _repo.GetUserAsync(req.Username);
-
-            if (user == null)
+            if (user == null || !user.IsActive || !BCrypt.Net.BCrypt.Verify(req.Password, user.PasswordHash))
                 return ApiResponse<object>.Fail("Invalid username or password");
 
-            if (!user.IsActive)
-                return ApiResponse<object>.Fail("Account disabled");
+            // 3. Kiểm tra thiết bị có tồn tại chưa
+            var existingDevice = await _repo.GetUserDeviceByUserAndDeviceAsync(user.Id, deviceName, ip);
 
-            bool valid = BCrypt.Net.BCrypt.Verify(req.Password, user.PasswordHash);
+            if (existingDevice != null)
+            {
+                // Thiết bị cũ → update refresh token, last active
+                existingDevice.RefreshToken = GenerateRefreshToken();
+                existingDevice.ExpiresAt = DateTime.UtcNow.AddDays(int.Parse(_config["Jwt:RefreshExpireDays"] ?? "7"));
+                existingDevice.LastActive = DateTime.UtcNow;
+                existingDevice.IsRevoked = false;
+                await _repo.UpdateUserDeviceAsync(existingDevice);
 
-            if (!valid)
-                return ApiResponse<object>.Fail("Invalid username or password");
+                var accessToken = _jwt.GenerateToken(user);
 
-            var token = _jwt.GenerateToken(user);
+                return ApiResponse<object>.Ok(new
+                {
+                    accessToken,
+                    refreshToken = existingDevice.RefreshToken,
+                    expiresIn = int.Parse(_config["Jwt:ExpireSeconds"] ?? "7200")
+                }, "Login successful");
+            }
+            else
+            {
+                // Thiết bị mới → gửi OTP device
+                return await SendOtpForDeviceAsync(user.Email);
+            }
+        }
 
+        // Hàm tái sử dụng gửi OTP cho thiết bị mới
+        private async Task<ApiResponse<object>> SendOtpForDeviceAsync(string email)
+        {
+            // Redis đã handle cooldown + attempt → tránh spam
+            var otpResult = await _otpService.GenerateOtpAsync(email);
+            if (!otpResult.Success)
+                return ApiResponse<object>.Fail(otpResult.Message);
+
+            // Gửi email OTP với type = device
+            _ = Task.Run(() => _emailService.SendOtpEmail(email, otpResult.Otp!, type: "device"));
+
+            return ApiResponse<object>.Ok(new
+            {
+                requireOtp = true,
+                message = "OTP sent to your email to verify new device"
+            });
+        }
+
+        public async Task<ApiResponse<object>> VerifyOtpForDeviceAsync(VerifyOtpRequest req)
+        {
+            // 1. Verify OTP
+            var valid = await _otpService.VerifyOtpAsync(req.Email, req.Otp);
+            if (!valid) return ApiResponse<object>.Fail("OTP không đúng");
+
+            // 2. Lấy user
+            var user = await _repo.GetByEmailAsync(req.Email);
+            if (user == null) return ApiResponse<object>.Fail("User not found");
+
+            // 3. Lấy device info
+            var deviceName = _httpContextAccessor.HttpContext?.Request.Headers["User-Agent"].ToString() ?? "unknown device";
+            var ip = _httpContextAccessor.HttpContext?.Connection.RemoteIpAddress?.ToString() ?? "unknown";
+
+            // 4. Tạo device mới trong DB
+            var refreshToken = GenerateRefreshToken();
+            var refreshExpireDays = int.Parse(_config["Jwt:RefreshExpireDays"] ?? "7");
+            var device = new UserDevice
+            {
+                UserId = user.Id,
+                DeviceName = deviceName,
+                IpAddress = ip,
+                RefreshToken = refreshToken,
+                ExpiresAt = DateTime.UtcNow.AddDays(refreshExpireDays)
+            };
+            await _repo.AddUserDeviceAsync(device);
+
+            // 5. Trả access token
+            var accessToken = _jwt.GenerateToken(user);
             int expire = int.Parse(_config["Jwt:ExpireSeconds"] ?? "7200");
 
             return ApiResponse<object>.Ok(new
             {
-                accessToken = token,
-                expiresIn = expire,
-                user = new
-                {
-                    user.Id,
-                    user.Username,
-                    user.Email,
-                    avatar = user.Profile?.AvatarUrl,
-                    roles = user.UserRoles.Select(r => r.Role.Name)
-                }
-            }, "Login successful");
+                accessToken,
+                refreshToken,
+                expiresIn = expire
+            }, "Device verified and saved, login successful");
+        }
+
+        public async Task<UserDevice?> GetDeviceByRefreshTokenAsync(string token)
+        {
+            return await _repo.GetUserDeviceByRefreshTokenAsync(token);
+        }
+
+        public string GenerateJwtForUser(User user) => _jwt.GenerateToken(user);
+
+        public async Task<string> RotateRefreshTokenAsync(UserDevice device)
+        {
+            var newToken = GenerateRefreshToken();
+            device.RefreshToken = newToken;
+            device.ExpiresAt = DateTime.UtcNow.AddDays(int.Parse(_config["Jwt:RefreshExpireDays"] ?? "7"));
+            device.LastActive = DateTime.UtcNow;
+            await _repo.RevokeDeviceAsync(device);
+            return newToken;
+        }
+
+        public async Task<IEnumerable<object>> GetUserDevicesAsync(Guid userId)
+        {
+            var devices = await _repo.GetUserDevicesAsync(userId);
+            return devices.Select(d => new { d.Id, d.DeviceName, d.IpAddress, d.LastActive, d.ExpiresAt });
+        }
+
+        public async Task<User?> GetUserByUsernameAsync(string username)
+        {
+            return await _repo.GetUserAsync(username);
+        }
+
+        public async Task<ApiResponse<object>> RefreshTokenAsync(string refreshToken, string deviceName, string ip)
+        {
+            var device = await _repo.GetUserDeviceByRefreshTokenAsync(refreshToken);
+            if (device == null || device.ExpiresAt < DateTime.UtcNow)
+                return ApiResponse<object>.Fail("Invalid or expired refresh token");
+
+            var accessToken = GenerateJwtForUser(device.User);
+            var newRefreshToken = await RotateRefreshTokenAsync(device);
+
+            return ApiResponse<object>.Ok(new
+            {
+                accessToken,
+                refreshToken = newRefreshToken,
+                expiresIn = int.Parse(_config["Jwt:ExpireSeconds"] ?? "7200")
+            });
+        }
+
+        public async Task<ApiResponse<object>> RevokeTokenAsync(string refreshToken, string currentUser, bool isAdmin)
+        {
+            var device = await _repo.GetUserDeviceByRefreshTokenAsync(refreshToken);
+            if (device == null)
+                return ApiResponse<object>.Fail("Device not found");
+
+            if (!isAdmin && device.User.Username != currentUser)
+                return ApiResponse<object>.Fail("Forbidden");
+
+            await _repo.RevokeDeviceAsync(device);
+            return ApiResponse<object>.Ok(null, "Token revoked");
         }
 
         public async Task<ApiResponse<object>> CreateUserAsync(CreateUserRequest req, ClaimsPrincipal currentUser)
@@ -134,6 +261,7 @@ namespace MyAPI.Services.Auth
             if (exist != null)
                 return ApiResponse<object>.Fail("Username đã tồn tại");
 
+            // 1. Tạo user mới
             var user = new User
             {
                 Username = req.Username,
@@ -144,9 +272,38 @@ namespace MyAPI.Services.Auth
 
             await _repo.AddUserAsync(user, "User");
 
+            // 2. Lấy thông tin thiết bị hiện tại từ HttpContext
+            var deviceName = _httpContextAccessor.HttpContext?.Request.Headers["User-Agent"].ToString() ?? "unknown device";
+            var ip = _httpContextAccessor.HttpContext?.Connection.RemoteIpAddress?.ToString() ?? "unknown";
+
+            // 3. Tạo device mặc định cho user mới
+            var refreshToken = GenerateRefreshToken();
+            var refreshExpireDays = int.Parse(_config["Jwt:RefreshExpireDays"] ?? "7");
+
+            var device = new UserDevice
+            {
+                UserId = user.Id,
+                DeviceName = deviceName,
+                IpAddress = ip,
+                RefreshToken = refreshToken,
+                ExpiresAt = DateTime.UtcNow.AddDays(refreshExpireDays)
+            };
+
+            await _repo.AddUserDeviceAsync(device);
+
+            // 4. Xóa token OTP
             await _otpService.RemoveTokenAsync(req.Token);
 
-            return ApiResponse<object>.Ok(null, "Account created");
+            // 5. Trả về access + refresh token luôn
+            var accessToken = _jwt.GenerateToken(user);
+            int expire = int.Parse(_config["Jwt:ExpireSeconds"] ?? "7200");
+
+            return ApiResponse<object>.Ok(new
+            {
+                accessToken,
+                refreshToken,
+                expiresIn = expire
+            }, "Account created and device added");
         }
 
         public async Task<ApiResponse<object>> DeleteUserAsync(string username, string currentUser, bool isAdmin)

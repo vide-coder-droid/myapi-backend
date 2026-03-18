@@ -13,6 +13,8 @@ namespace MyAPI.Data
 
         public DbSet<User> Users { get; set; }
 
+        public DbSet<UserDevice> UserDevices { get; set; }
+
         public DbSet<Role> Roles { get; set; }
 
         public DbSet<UserRole> UserRoles { get; set; }
@@ -35,6 +37,11 @@ namespace MyAPI.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+
+            modelBuilder.Entity<UserDevice>()
+                .HasIndex(x => new { x.UserId, x.RefreshToken })
+                .IsUnique();
+
             // UserRoles
             modelBuilder.Entity<UserRole>()
                 .HasKey(x => new { x.UserId, x.RoleId });

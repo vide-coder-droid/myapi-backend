@@ -74,5 +74,56 @@ namespace MyAPI.Repositories
 
             await _db.SaveChangesAsync();
         }
+
+
+        public async Task AddUserDeviceAsync(UserDevice device)
+        {
+            await _db.UserDevices.AddAsync(device);
+            await _db.SaveChangesAsync();
+        }
+
+        public async Task<UserDevice?> GetUserDeviceByRefreshTokenAsync(string refreshToken)
+        {
+            return await _db.UserDevices
+                .Include(x => x.User)
+                    .ThenInclude(u => u.UserRoles)
+                        .ThenInclude(ur => ur.Role)
+                            .ThenInclude(r => r.RolePermissions)
+                                .ThenInclude(rp => rp.Permission)
+                .FirstOrDefaultAsync(x => x.RefreshToken == refreshToken && !x.IsRevoked);
+        }
+
+        public async Task<IEnumerable<UserDevice>> GetUserDevicesAsync(Guid userId)
+        {
+            return await _db.UserDevices
+                .Where(d => d.UserId == userId && !d.IsRevoked)
+                .ToListAsync();
+        }
+
+        public async Task<UserDevice?> GetDeviceByIdAsync(Guid id)
+        {
+            return await _db.UserDevices.FirstOrDefaultAsync(d => d.Id == id);
+        }
+
+        public async Task RevokeDeviceAsync(UserDevice device)
+        {
+            device.IsRevoked = true;
+            await _db.SaveChangesAsync();
+        }
+
+        public async Task<UserDevice?> GetUserDeviceByUserAndDeviceAsync(Guid userId, string deviceName, string ip)
+        {
+            return await _db.UserDevices
+                .FirstOrDefaultAsync(d => d.UserId == userId
+                                       && d.DeviceName == deviceName
+                                       && d.IpAddress == ip
+                                       && !d.IsRevoked);
+        }
+
+        public async Task UpdateUserDeviceAsync(UserDevice device)
+        {
+            _db.UserDevices.Update(device);
+            await _db.SaveChangesAsync();
+        }
     }
 }

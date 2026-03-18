@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace MyAPI.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20260316010332_Init")]
-    partial class Init
+    [Migration("20260318090608_InitialCreate")]
+    partial class InitialCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -248,6 +248,46 @@ namespace MyAPI.Migrations
                     b.ToTable("Users");
                 });
 
+            modelBuilder.Entity("MyAPI.Models.Entities.UserDevice", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("DeviceName")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<DateTime>("ExpiresAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("IpAddress")
+                        .HasColumnType("text");
+
+                    b.Property<bool>("IsRevoked")
+                        .HasColumnType("boolean");
+
+                    b.Property<DateTime>("LastActive")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("RefreshToken")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uuid");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId", "RefreshToken")
+                        .IsUnique();
+
+                    b.ToTable("UserDevices");
+                });
+
             modelBuilder.Entity("MyAPI.Models.Entities.UserProfile", b =>
                 {
                     b.Property<Guid>("Id")
@@ -391,6 +431,17 @@ namespace MyAPI.Migrations
                     b.Navigation("Permission");
 
                     b.Navigation("Role");
+                });
+
+            modelBuilder.Entity("MyAPI.Models.Entities.UserDevice", b =>
+                {
+                    b.HasOne("MyAPI.Models.Entities.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("MyAPI.Models.Entities.UserProfile", b =>

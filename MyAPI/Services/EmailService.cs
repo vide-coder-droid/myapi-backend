@@ -13,7 +13,7 @@ public class EmailService
             throw new Exception("Brevo API key is missing!");
     }
 
-    public async Task SendOtpEmail(string toEmail, string otp)
+    public async Task SendOtpEmail(string toEmail, string otp, string type = "register")
     {
         using var client = new HttpClient();
         client.BaseAddress = new Uri("https://api.brevo.com/v3/smtp/email");
@@ -24,8 +24,8 @@ public class EmailService
         {
             sender = new { name = "Zentra App", email = "noreply@vanda.id.vn" },
             to = new[] { new { email = toEmail } },
-            subject = "Mã OTP xác thực",
-            htmlContent = GetOtpTemplate(otp)
+            subject = type == "register" ? "Mã OTP xác thực" : "Xác thực thiết bị mới",
+            htmlContent = GetOtpTemplate(otp, type)
         };
 
         var content = new StringContent(JsonSerializer.Serialize(payload), Encoding.UTF8, "application/json");
@@ -40,9 +40,14 @@ public class EmailService
         }
     }
 
-    private string GetOtpTemplate(string otp)
-    {
-        return $@"
+    private string GetOtpTemplate(string otp, string type)
+{
+    string title = type == "register" ? "Xác thực tài khoản" : "Xác thực thiết bị mới";
+    string text = type == "register" 
+        ? "Bạn đang đăng ký tài khoản tại <b>Zentra App</b>" 
+        : "Bạn đang đăng nhập từ thiết bị mới tại <b>Zentra App</b>";
+
+    return $@"
 <!DOCTYPE html>
 <html>
 <head>
@@ -58,13 +63,13 @@ body {{ font-family: Arial, sans-serif; background-color: #f4f6f8; margin: 0; pa
 </head>
 <body>
 <div class='container'>
-<div class='title'>Xác thực tài khoản</div>
-<div class='text'>Bạn đang đăng ký tài khoản tại <b>Zentra App</b></div>
+<div class='title'>{title}</div>
+<div class='text'>{text}</div>
 <div class='otp'>{otp}</div>
 <div class='text'>Mã OTP có hiệu lực trong <b>5 phút</b>.<br/>Không chia sẻ mã này với bất kỳ ai.</div>
 <div class='footer'>Nếu bạn không yêu cầu, hãy bỏ qua email này.</div>
 </div>
 </body>
 </html>";
-    }
+}
 }
