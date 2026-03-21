@@ -47,15 +47,15 @@ public class ChatController : ControllerBase
 
         var result = await _chatService.SendMessage(
             senderId,
-            request.ReceiverId,
+            request.ConversationId,
             request.Content
         );
 
         if (result.Data == null)
             return BadRequest(result);
 
-        // map result.Data về DTO mạnh kiểu
         var data = result.Data;
+
         var messageDto = new RoomMessageDto
         {
             ConversationId = ((dynamic)data).conversationId,
@@ -64,7 +64,6 @@ public class ChatController : ControllerBase
             CreatedAt = ((dynamic)data).createdAt
         };
 
-        // gửi realtime qua SignalR
         await _hub.Clients.Group(messageDto.ConversationId.ToString())
             .SendAsync("ReceiveRoomMessage", messageDto);
 

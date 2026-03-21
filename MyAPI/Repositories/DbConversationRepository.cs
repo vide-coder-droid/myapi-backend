@@ -16,6 +16,8 @@ public class DbConversationRepository : IConversationRepository
         return await _context.Conversations
             .Include(c => c.Messages.OrderByDescending(m => m.CreatedAt).Take(1))
             .Include(c => c.Members)
+                .ThenInclude(m => m.User)
+                    .ThenInclude(u => u.Profile)
             .Where(c => c.Members.Any(m => m.UserId == userId))
             .OrderByDescending(c => c.Messages.Any()
                 ? c.Messages.Max(m => m.CreatedAt)
@@ -67,4 +69,10 @@ public class DbConversationRepository : IConversationRepository
         return conversation;
     }
 
+    public async Task<Conversation?> GetConversationWithMembers(Guid conversationId)
+    {
+        return await _context.Conversations
+            .Include(c => c.Members)
+            .FirstOrDefaultAsync(c => c.Id == conversationId);
+    }
 }

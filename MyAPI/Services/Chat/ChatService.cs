@@ -22,14 +22,30 @@ namespace MyAPI.Services.Chat
                 return ApiResponse<object>.Ok(new { message = "No conversations" });
             }
 
-            var result = conversations.Select(c => new
+            var result = conversations.Select(c =>
             {
-                c.Id,
-                c.Title,
-                c.Type,
-                c.CreatedAt,
-                LastMessage = c.Messages?.FirstOrDefault()?.Content,
-                LastMessageTime = c.Messages?.FirstOrDefault()?.CreatedAt
+                string title = c.Title ?? "No name";
+
+                if (c.Type == "private")
+                {
+                    var otherUser = c.Members
+                        .FirstOrDefault(m => m.UserId != userId)?.User;
+
+                    if (otherUser != null)
+                    {
+                        title = otherUser.Profile?.FullName ?? otherUser.Username;
+                    }
+                }
+
+                return new
+                {
+                    c.Id,
+                    Title = title,
+                    c.Type,
+                    c.CreatedAt,
+                    LastMessage = c.Messages?.FirstOrDefault()?.Content,
+                    LastMessageTime = c.Messages?.FirstOrDefault()?.CreatedAt
+                };
             });
 
             return ApiResponse<object>.Ok(result, "Conversations retrieved");
@@ -50,26 +66,23 @@ namespace MyAPI.Services.Chat
             return ApiResponse<object>.Ok(result, "Messages retrieved");
         }
 
-        public async Task<ApiResponse<object>> SendMessage(Guid senderId, Guid receiverId, string content)
+        public async Task<ApiResponse<object>> SendMessage(Guid senderId, Guid conversationId, string content)
         {
-            if (receiverId == Guid.Empty)
-                return ApiResponse<object>.Fail("ReceiverId không hợp lệ");
+            if (conversationId == Guid.Empty)
+                return ApiResponse<object>.Fail("ConversationId không hợp lệ");
 
             if (string.IsNullOrWhiteSpace(content))
                 return ApiResponse<object>.Fail("Content rỗng");
 
-            // 1. tìm conversation
-            var conversation = await _repo.GetPrivateConversation(senderId, receiverId);
+            // 1. lấy conversation + members
+            var conversation = await _repo.GetConversationWithMembers(conversationId);
 
-            // 2. nếu chưa có → tạo mới
             if (conversation == null)
-            {
-                conversation = await _repo.CreatePrivateConversation(senderId, receiverId);
-            }
+                return ApiResponse<object>.Fail("Conversation không tồn tại");
 
-            // ❗ safety check
-            if (conversation == null)
-                return ApiResponse<object>.Fail("Không tạo được conversation");
+            // 2. check sender có trong room không
+            if (!conversation.Members.Any(m => m.UserId == senderId))
+                return ApiResponse<object>.Fail("Bạn không thuộc conversation này");
 
             // 3. lưu message
             var message = new Message

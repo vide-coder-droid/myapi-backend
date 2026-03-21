@@ -7,5 +7,8 @@ public interface IConversationRepository
     Task<Message> AddMessage(Message message);
 
     Task<Conversation?> GetPrivateConversation(Guid userA, Guid userB);
+    
     Task<Conversation> CreatePrivateConversation(Guid userA, Guid userB);
+
+    Task<Conversation?> GetConversationWithMembers(Guid conversationId);
 }
