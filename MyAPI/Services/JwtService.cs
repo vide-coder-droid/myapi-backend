@@ -30,6 +30,8 @@ namespace MyAPI.Services
 
             var claims = new List<Claim>
             {
+                new Claim("id", user.Id.ToString()),
+                new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()), 
                 new Claim("sub", user.Username),
                 new Claim("username", user.Username),
                 new Claim("jti", Guid.NewGuid().ToString())

@@ -64,8 +64,7 @@ namespace MyAPI.Services.Auth
             }
             else
             {
-                // Thiết bị mới → gửi OTP device
-                return await SendOtpForDeviceAsync(user.Email);
+                return await SendOtpForDeviceAsync(user.Email!);
             }
         }
 
@@ -182,7 +181,7 @@ namespace MyAPI.Services.Auth
                 return ApiResponse<object>.Fail("Forbidden");
 
             await _repo.RevokeDeviceAsync(device);
-            return ApiResponse<object>.Ok(null, "Token revoked");
+            return ApiResponse<object>.Ok(new { message = "Token revoked" });
         }
 
         public async Task<ApiResponse<object>> CreateUserAsync(CreateUserRequest req, ClaimsPrincipal currentUser)
@@ -230,8 +229,7 @@ namespace MyAPI.Services.Auth
                 }
 
                 _ = Task.Run(() => _emailService.SendOtpEmail(req.Email, result.Otp!));
-
-                return ApiResponse<object>.Ok(null, "OTP sent");
+                return ApiResponse<object>.Ok(new { message = "OTP sent" });
             }
             catch
             {

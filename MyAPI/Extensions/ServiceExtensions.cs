@@ -1,6 +1,7 @@
 ﻿using MyAPI.Repositories;
 using MyAPI.Services;
 using MyAPI.Services.Auth;
+using MyAPI.Services.Chat;
 using MyAPI.Services.Profile;
 using Microsoft.AspNetCore.Http;
 
@@ -22,6 +23,9 @@ public static class ServiceExtensions
 
         services.AddScoped<IProfileRepository, ProfileRepository>();
         services.AddScoped<IProfileService, ProfileService>();
+
+        services.AddScoped<IConversationRepository, DbConversationRepository>();
+        services.AddScoped<IChatService, ChatService>();
 
         return services;
     }
