@@ -70,7 +70,11 @@ namespace MyAPI.Hubs
         public async Task SendRoomMessage(string roomId, string userId, string message)
         {
             await Clients.Group(roomId)
-                .SendAsync("ReceiveRoomMessage", userId, message);
+            .SendAsync("ReceiveRoomMessage", new
+            {
+                userId,
+                content = message
+            });
         }
     }
 }
