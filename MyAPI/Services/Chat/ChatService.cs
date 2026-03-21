@@ -7,10 +7,15 @@ namespace MyAPI.Services.Chat
     public class ChatService : IChatService
     {
         private readonly IConversationRepository _repo;
+        private readonly IHttpContextAccessor _httpContextAccessor;
 
-        public ChatService(IConversationRepository repo)
+        public ChatService(
+            IConversationRepository repo,
+            IHttpContextAccessor httpContextAccessor
+        )
         {
             _repo = repo;
+            _httpContextAccessor = httpContextAccessor;
         }
 
         public async Task<ApiResponse<object>> GetUserConversations(Guid userId)
@@ -66,29 +71,39 @@ namespace MyAPI.Services.Chat
             return ApiResponse<object>.Ok(result, "Messages retrieved");
         }
 
-        public async Task<ApiResponse<object>> SendMessage(Guid senderId, Guid conversationId, string content)
+        private Guid GetCurrentUserId()
         {
+            var userId = _httpContextAccessor.HttpContext?.User?
+                .FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value;
+
+            if (string.IsNullOrEmpty(userId))
+                throw new Exception("Không lấy được userId từ token");
+
+            return Guid.Parse(userId);
+        }
+
+        public async Task<ApiResponse<SendMessageResponseDto>> SendMessage(Guid conversationId, string content)
+        {
+            var userId = GetCurrentUserId();
+
             if (conversationId == Guid.Empty)
-                return ApiResponse<object>.Fail("ConversationId không hợp lệ");
+                return ApiResponse<SendMessageResponseDto>.Fail("ConversationId không hợp lệ");
 
             if (string.IsNullOrWhiteSpace(content))
-                return ApiResponse<object>.Fail("Content rỗng");
+                return ApiResponse<SendMessageResponseDto>.Fail("Content rỗng");
 
-            // 1. lấy conversation + members
             var conversation = await _repo.GetConversationWithMembers(conversationId);
 
             if (conversation == null)
-                return ApiResponse<object>.Fail("Conversation không tồn tại");
+                return ApiResponse<SendMessageResponseDto>.Fail("Conversation không tồn tại");
 
-            // 2. check sender có trong room không
-            if (!conversation.Members.Any(m => m.UserId == senderId))
-                return ApiResponse<object>.Fail("Bạn không thuộc conversation này");
+            if (!conversation.Members.Any(m => m.UserId == userId))
+                return ApiResponse<SendMessageResponseDto>.Fail("Bạn không thuộc conversation này");
 
-            // 3. lưu message
             var message = new Message
             {
                 ConversationId = conversation.Id,
-                SenderId = senderId,
+                SenderId = userId,
                 Content = content,
                 MessageType = "text",
                 CreatedAt = DateTime.UtcNow
@@ -96,13 +111,16 @@ namespace MyAPI.Services.Chat
 
             var saved = await _repo.AddMessage(message);
 
-            return ApiResponse<object>.Ok(new
+            var dto = new SendMessageResponseDto
             {
-                conversationId = conversation.Id,
-                id = saved.Id,
-                content = saved.Content,
-                createdAt = saved.CreatedAt
-            }, "Message sent");
+                ConversationId = conversation.Id,
+                Id = saved.Id,
+                Content = saved.Content,
+                SenderId = userId,
+                CreatedAt = saved.CreatedAt
+            };
+
+            return ApiResponse<SendMessageResponseDto>.Ok(dto, "Message sent");
         }
     }
 }

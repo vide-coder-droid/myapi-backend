@@ -6,6 +6,6 @@ namespace MyAPI.Services.Chat
     {
         Task<ApiResponse<object>> GetUserConversations(Guid userId);
         Task<ApiResponse<object>> GetMessages(Guid conversationId);
-        Task<ApiResponse<object>> SendMessage(Guid conversationId, Guid senderId, string content);
+        Task<ApiResponse<SendMessageResponseDto>> SendMessage(Guid conversationId, string content);
     }
 }

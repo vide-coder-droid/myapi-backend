@@ -37,16 +37,7 @@ public class ChatController : ControllerBase
     [HttpPost("send")]
     public async Task<IActionResult> SendMessage([FromBody] SendMessageRequest request)
     {
-        var claim = User.FindFirst("id");
-
-        if (claim == null)
-            return Unauthorized("Token không có id");
-
-        if (!Guid.TryParse(claim.Value, out var senderId))
-            return Unauthorized("id không hợp lệ");
-
         var result = await _chatService.SendMessage(
-            senderId,
             request.ConversationId,
             request.Content
         );
@@ -58,10 +49,11 @@ public class ChatController : ControllerBase
 
         var messageDto = new RoomMessageDto
         {
-            ConversationId = ((dynamic)data).conversationId,
-            Id = ((dynamic)data).id,
-            Content = ((dynamic)data).content,
-            CreatedAt = ((dynamic)data).createdAt
+            ConversationId = data.ConversationId,
+            Id = data.Id,
+            Content = data.Content,
+            CreatedAt = data.CreatedAt,
+            SenderId = data.SenderId
         };
 
         await _hub.Clients.Group(messageDto.ConversationId.ToString())
