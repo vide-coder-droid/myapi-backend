@@ -19,7 +19,7 @@ namespace MyAPI.Services.Chat
 
             if (conversations == null || !conversations.Any())
             {
-                return ApiResponse<object>.Ok(null, "No conversations");
+                return ApiResponse<object>.Ok(new { message = "No conversations" });
             }
 
             var result = conversations.Select(c => new
